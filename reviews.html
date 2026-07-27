@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы | Принцип-Про</title>
+    <meta name="description" content="Отзывы и благодарственные письма от клиентов компании «Принцип-Про». Опыт сотрудничества и оценка качества наших услуг.">
+    <meta property="og:title" content="Отзывы клиентов | Принцип-Про">
+    <meta property="og:description" content="Отзывы и благодарственные письма от клиентов компании «Принцип-Про». Опыт сотрудничества и оценка качества наших услуг.">
+    <meta property="og:type" content="website">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .review-card { padding: 2rem; background: var(--bg-light); border-radius: 12px; border: 1px solid var(--border-color); }
+        .review-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .review-avatar { width: 50px; height: 50px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--text-secondary); flex-shrink: 0; }
+        .review-header h4 { margin: 0 0 0.2rem 0; font-size: 1.1rem; }
+        .review-role { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+        .review-stars { color: #ffc107; margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 2px; }
+        .review-text { font-style: italic; line-height: 1.6; color: var(--text-primary); margin: 0; }
+        .cta-reviews { text-align: center; background-color: var(--bg-light); padding: 4rem 2rem; border-radius: 12px; border: 1px solid var(--border-color); margin-top: 4rem; }
+        .cta-reviews h2 { margin-bottom: 1rem; }
+        .cta-reviews p { margin-bottom: 2rem; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+        <nav class="nav" id="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item has-dropdown">
+                    <a href="services.html" class="nav-link">Услуги <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="services.html#design" class="dropdown-link"><i class="fa-solid fa-compass-drafting"></i> Проектирование</a>
+                        <a href="services.html#montazh" class="dropdown-link"><i class="fa-solid fa-helmet-safety"></i> Монтаж</a>
+                        <a href="services.html#audit" class="dropdown-link"><i class="fa-solid fa-magnifying-glass-chart"></i> Технический аудит</a>
+                        <a href="services.html#modernization" class="dropdown-link"><i class="fa-solid fa-arrows-rotate"></i> Модернизация</a>
+                        <a href="services.html#pnr" class="dropdown-link"><i class="fa-solid fa-play"></i> Пуско-наладка</a>
+                        <a href="services.html#repair" class="dropdown-link"><i class="fa-solid fa-wrench"></i> Ремонт и сервис</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="equipment.html" class="nav-link">Оборудование <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="equipment.html#water-prep" class="dropdown-link"><i class="fa-solid fa-filter"></i> Водоподготовка</a>
+                        <a href="equipment.html#electrolysis" class="dropdown-link"><i class="fa-solid fa-bolt"></i> Электролизные установки</a>
+                        <a href="equipment.html#uv" class="dropdown-link"><i class="fa-solid fa-sun"></i> УФ-обеззараживание</a>
+                        <a href="equipment.html#automation" class="dropdown-link"><i class="fa-solid fa-microchip"></i> АСУ ТП и автоматика</a>
+                        <a href="equipment.html#reagents" class="dropdown-link"><i class="fa-solid fa-flask"></i> Реагенты</a>
+                        <a href="equipment.html#parts" class="dropdown-link"><i class="fa-solid fa-gears"></i> Комплектующие</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="about.html" class="nav-link">О компании <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="about.html" class="dropdown-link"><i class="fa-solid fa-building"></i> О нас</a>
+                        <a href="portfolio.html" class="dropdown-link"><i class="fa-solid fa-images"></i> Наши объекты</a>
+                        <a href="docs.html" class="dropdown-link"><i class="fa-solid fa-file-certificate"></i> Документация</a>
+                        <a href="reviews.html" class="dropdown-link"><i class="fa-solid fa-star"></i> Отзывы</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="tel:+78005507514" class="phone-link">8 (800) 550-75-14</a>
+            <a href="contact.html" class="btn btn-outline header-btn">Заказать звонок</a>
+            <button class="burger" id="burger-btn" aria-label="Открыть меню"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> <span>/</span> <span>Отзывы клиентов</span>
+            </div>
+            <h1>Отзывы клиентов</h1>
+            <p>Что говорят о нас наши клиенты.</p>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container">
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Иван Петрович</h4>
+                            <p class="review-role">Главный инженер, ООО «Агропром»</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Работаем с Принцип-Про уже третий год. Система водоподготовки на нашем предприятии работает безупречно. Сервис оперативный, всегда на связи."</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Елена Соколова</h4>
+                            <p class="review-role">Владелец коттеджа</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Заказали систему очистки для скважины. Вода стала кристально чистой. Спасибо за профессионализм и оперативность!"</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Алексей Николаев</h4>
+                            <p class="review-role">Гл. инженер, МУП «Водоканал»</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Провели модернизацию нашей станции водоподготовки. Производительность выросла на 30%, затраты на реагенты сократились."</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Марина Волкова</h4>
+                            <p class="review-role">Технолог, ООО «Молпром»</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Очень довольны качеством оборудования и сроками поставки. Всё было сделано в срок и с полной документацией."</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Дмитрий Кузнецов</h4>
+                            <p class="review-role">Управляющий КП «Сосновый бор»</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    <p class="review-text">"Установили систему на весь посёлок. Работает стабильно. Единственное — хотелось бы чуть быстрее по срокам."</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Ольга Михайлова</h4>
+                            <p class="review-role">Директор, ООО «Водные ресурсы»</p>
+                        </div>
+                    </div>
+                    <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Профессиональный подход на всех этапах: от проекта до запуска. Рекомендуем как надёжного партнёра."</p>
+                </div>
+            </div>
+
+            <div class="cta-reviews">
+                <h2>Хотите оставить отзыв?</h2>
+                <p>Мы всегда рады обратной связи от наших клиентов. Поделитесь своими впечатлениями о работе с нами.</p>
+                <a href="contact.html" class="btn btn-primary">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-col brand-col">
+            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <p class="footer-desc">Проектирование и производство оборудования для очистки и подготовки воды.</p>
+            <div class="socials">
+                <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" aria-label="MAX Chat" target="_blank" title="Написать в MAX"><i class="fa-solid fa-comment-dots"></i></a>
+                <a href="#" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Навигация</h4>
+            <ul class="footer-links">
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="equipment.html">Оборудование</a></li>
+                <li><a href="about.html">О компании</a></li>
+                <li><a href="portfolio.html">Наши объекты</a></li>
+                <li><a href="docs.html">Документация</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Услуги</h4>
+            <ul class="footer-links">
+                <li><a href="services.html#design">Проектирование</a></li>
+                <li><a href="services.html#montazh">Монтаж</a></li>
+                <li><a href="services.html#audit">Технический аудит</a></li>
+                <li><a href="services.html#repair">Ремонт и сервис</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Контакты</h4>
+            <ul class="footer-contacts">
+                <li><i class="fa-solid fa-phone"></i> <a href="tel:+78005507514">8 (800) 550-75-14</a></li>
+                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@princip-pro.ru">info@princip-pro.ru</a></li>
+                <li><i class="fa-solid fa-location-dot"></i> г. Краснодар</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Компания «Принцип-Про». Все права защищены.</p>
+    </div>
+</footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="callback-modal">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">Оставить заявку</h3>
+            <p class="modal-desc">Оставьте свои данные, и наш специалист свяжется с вами в течение 15 минут.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="Ваш телефон" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Жду звонка</button>
+                <p class="policy-text" style="font-size: 0.8rem; color: var(--text-secondary); text-align: center; margin-top: 1rem;">Нажимая кнопку, вы соглашаетесь с <a href="policy.html" style="color: var(--accent-color);">политикой конфиденциальности</a>.</p>
+            </form>
+        </div>
+    </div>
+
+        <!-- MAX Widget -->
+    <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" class="max-widget" target="_blank" aria-label="Написать в МАКС">
+        <img src="img/max-logo.png" alt="Чат МАКС">
+    </a>
+    <script src="js/script.js"></script>
+<a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" target="_blank" class="floating-chat" title="Написать в MAX">
+    <i class="fa-solid fa-comment-dots"></i>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+

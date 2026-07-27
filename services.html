@@ -1,0 +1,451 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги | Принцип-Про - Системы водоочистки</title>
+    <meta name="description" content="Полный цикл работ по проектированию, производству, монтажу и обслуживанию систем водоочистки от компании «Принцип-Про».">
+    <meta property="og:title" content="Услуги | Принцип-Про - Системы водоочистки">
+    <meta property="og:description" content="Полный цикл работ по проектированию, производству, монтажу и обслуживанию систем водоочистки.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+        <nav class="nav" id="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item has-dropdown">
+                    <a href="services.html" class="nav-link">Услуги <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="services.html#design" class="dropdown-link"><i class="fa-solid fa-compass-drafting"></i> Проектирование</a>
+                        <a href="services.html#montazh" class="dropdown-link"><i class="fa-solid fa-helmet-safety"></i> Монтаж</a>
+                        <a href="services.html#audit" class="dropdown-link"><i class="fa-solid fa-magnifying-glass-chart"></i> Технический аудит</a>
+                        <a href="services.html#modernization" class="dropdown-link"><i class="fa-solid fa-arrows-rotate"></i> Модернизация</a>
+                        <a href="services.html#pnr" class="dropdown-link"><i class="fa-solid fa-play"></i> Пуско-наладка</a>
+                        <a href="services.html#repair" class="dropdown-link"><i class="fa-solid fa-wrench"></i> Ремонт и сервис</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="equipment.html" class="nav-link">Оборудование <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="equipment.html#water-prep" class="dropdown-link"><i class="fa-solid fa-filter"></i> Водоподготовка</a>
+                        <a href="equipment.html#electrolysis" class="dropdown-link"><i class="fa-solid fa-bolt"></i> Электролизные установки</a>
+                        <a href="equipment.html#uv" class="dropdown-link"><i class="fa-solid fa-sun"></i> УФ-обеззараживание</a>
+                        <a href="equipment.html#automation" class="dropdown-link"><i class="fa-solid fa-microchip"></i> АСУ ТП и автоматика</a>
+                        <a href="equipment.html#reagents" class="dropdown-link"><i class="fa-solid fa-flask"></i> Реагенты</a>
+                        <a href="equipment.html#parts" class="dropdown-link"><i class="fa-solid fa-gears"></i> Комплектующие</a>
+                    </div>
+                </li>
+                <li class="nav-item has-dropdown">
+                    <a href="about.html" class="nav-link">О компании <i class="fa-solid fa-chevron-down"></i></a>
+                    <div class="dropdown">
+                        <a href="about.html" class="dropdown-link"><i class="fa-solid fa-building"></i> О нас</a>
+                        <a href="portfolio.html" class="dropdown-link"><i class="fa-solid fa-images"></i> Наши объекты</a>
+                        <a href="docs.html" class="dropdown-link"><i class="fa-solid fa-file-certificate"></i> Документация</a>
+                        <a href="reviews.html" class="dropdown-link"><i class="fa-solid fa-star"></i> Отзывы</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="tel:+78005507514" class="phone-link">8 (800) 550-75-14</a>
+            <a href="contact.html" class="btn btn-outline header-btn">Заказать звонок</a>
+            <button class="burger" id="burger-btn" aria-label="Открыть меню"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> <span>/</span> <span>Услуги</span>
+            </div>
+            <h1>Услуги</h1>
+            <p>Полный цикл работ по проектированию, производству, монтажу и обслуживанию систем водоочистки.</p>
+        </div>
+    </section>
+
+    <section class="services-list-section">
+        <div class="container">
+            <!-- Service 1: Проектирование -->
+            <div id="design" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Проектирование систем водоочистки</h3>
+                        <p>Разрабатываем проектную документацию для систем водоподготовки любой сложности. Проводим расчёты, подбираем оборудование и создаём индивидуальные решения с учётом специфики объекта.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-flask"></i>
+                                <div>
+                                    <h4>Анализ исходной воды</h4>
+                                    <p>Полный химический и бактериологический анализ для точного подбора.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-file-lines"></i>
+                                <div>
+                                    <h4>Разработка ТЗ</h4>
+                                    <p>Подготовка технического задания и согласование с заказчиком.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-cubes"></i>
+                                <div>
+                                    <h4>3D-моделирование</h4>
+                                    <p>Визуализация системы и привязка к помещению.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                                <div>
+                                    <h4>Проектная документация</h4>
+                                    <p>Полный комплект документов для монтажа и сдачи объекта.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary">Оставить заявку</a>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/reverse-osmosis.jpg" alt="Проектирование систем водоочистки">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Монтаж -->
+            <div id="montazh" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Монтаж оборудования</h3>
+                        <p>Выполняем профессиональный монтаж систем водоочистки на объектах любой сложности. Наши инженеры имеют опыт установки промышленных станций, блочно-модульных комплексов и бытовых систем.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <div>
+                                    <h4>Доставка</h4>
+                                    <p>Безопасная доставка оборудования до объекта.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-plug"></i>
+                                <div>
+                                    <h4>Подключение</h4>
+                                    <p>Врезка в существующие инженерные сети.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-vial"></i>
+                                <div>
+                                    <h4>Тестирование</h4>
+                                    <p>Гидравлические испытания и проверка герметичности.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-file-signature"></i>
+                                <div>
+                                    <h4>Акты и документы</h4>
+                                    <p>Подписание актов выполненных работ.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-modal="callback-modal">Оставить заявку</button>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/montage.jpg" alt="Монтаж оборудования">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3: Технический аудит -->
+            <div id="audit" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Технический аудит систем водоочистки</h3>
+                        <p>Проводим комплексный аудит существующих систем водоподготовки. Выявляем недостатки, определяем причины неэффективной работы и даём рекомендации по оптимизации.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-microscope"></i>
+                                <div>
+                                    <h4>Диагностика</h4>
+                                    <p>Полная диагностика всех узлов системы.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <div>
+                                    <h4>Анализ эффективности</h4>
+                                    <p>Оценка текущей производительности и качества очистки.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-list-check"></i>
+                                <div>
+                                    <h4>Отчёт с рекомендациями</h4>
+                                    <p>Подробный отчёт с планом мероприятий.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                                <div>
+                                    <h4>Расчёт экономии</h4>
+                                    <p>Прогноз снижения затрат после модернизации.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary">Оставить заявку</a>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/instruments.jpg" alt="Технический аудит">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4: Модернизация -->
+            <div id="modernization" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Модернизация и оптимизация</h3>
+                        <p>Обновляем и совершенствуем существующее оборудование водоподготовки. Повышаем производительность, снижаем расход реагентов и энергии, внедряем современные системы автоматизации.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-microchip"></i>
+                                <div>
+                                    <h4>Автоматизация</h4>
+                                    <p>Внедрение систем АСУ ТП и удалённого управления.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <div>
+                                    <h4>Повышение производительности</h4>
+                                    <p>Увеличение мощности без замены всей системы.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-leaf"></i>
+                                <div>
+                                    <h4>Энергоэффективность</h4>
+                                    <p>Сокращение потребления энергии и реагентов.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-rotate"></i>
+                                <div>
+                                    <h4>Замена узлов</h4>
+                                    <p>Точечная замена устаревших компонентов.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary">Оставить заявку</a>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/asutp.jpg" alt="Модернизация и оптимизация">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5: Пуско-наладка -->
+            <div id="pnr" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Пуско-наладочные работы</h3>
+                        <p>Обеспечиваем корректный запуск систем водоочистки. Настраиваем автоматику, отрабатываем режимы работы, обучаем персонал заказчика и сдаём объект под ключ.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-sliders"></i>
+                                <div>
+                                    <h4>Настройка</h4>
+                                    <p>Точная настройка всех параметров системы.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-toggle-on"></i>
+                                <div>
+                                    <h4>Тестовый запуск</h4>
+                                    <p>Обкатка оборудования в реальных условиях.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                <div>
+                                    <h4>Обучение персонала</h4>
+                                    <p>Инструктаж и обучение операторов.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-file-contract"></i>
+                                <div>
+                                    <h4>Документация</h4>
+                                    <p>Передача паспортов, инструкций и актов.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary">Оставить заявку</a>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/control-cabinet.jpg" alt="Пуско-наладочные работы">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6: Ремонт и сервис -->
+            <div id="repair" class="service-section reveal">
+                <div class="service-hero">
+                    <div class="service-info">
+                        <h3>Ремонт и сервисное обслуживание</h3>
+                        <p>Осуществляем гарантийное и постгарантийное обслуживание систем водоочистки. Замена расходных материалов, промывка мембран, оперативный ремонт.</p>
+                        <div class="service-features grid-2-col">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-calendar-check"></i>
+                                <div>
+                                    <h4>Регулярное ТО</h4>
+                                    <p>Плановое обслуживание по графику.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-truck-medical"></i>
+                                <div>
+                                    <h4>Экстренный выезд</h4>
+                                    <p>Оперативное реагирование на аварийные ситуации.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-filter-circle-xmark"></i>
+                                <div>
+                                    <h4>Замена фильтров</h4>
+                                    <p>Замена загрузок, картриджей и мембран.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-headset"></i>
+                                <div>
+                                    <h4>Техподдержка 24/7</h4>
+                                    <p>Круглосуточная консультация по телефону.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary">Оставить заявку</a>
+                    </div>
+                    <div class="service-image-placeholder">
+                        <img src="images/equipment/montage.jpg" alt="Ремонт и сервисное обслуживание">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section reveal">
+        <div class="container">
+            <div class="cta-wrapper">
+                <div class="cta-content">
+                    <h2>Нужна консультация специалиста?</h2>
+                    <p>Оставьте заявку, и наш инженер свяжется с вами для бесплатной консультации.</p>
+                </div>
+                <div class="cta-form-container">
+                    <form class="cta-form" action="#" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="form-control" placeholder="Ваш телефон" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-col brand-col">
+            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <p class="footer-desc">Проектирование и производство оборудования для очистки и подготовки воды.</p>
+            <div class="socials">
+                <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" aria-label="MAX Chat" target="_blank" title="�������� � MAX"><i class="fa-solid fa-comment-dots"></i></a>
+                <a href="#" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Навигация</h4>
+            <ul class="footer-links">
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="equipment.html">Оборудование</a></li>
+                <li><a href="about.html">О компании</a></li>
+                <li><a href="portfolio.html">Наши объекты</a></li>
+                <li><a href="docs.html">Документация</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Услуги</h4>
+            <ul class="footer-links">
+                <li><a href="services.html#design">Проектирование</a></li>
+                <li><a href="services.html#montazh">Монтаж</a></li>
+                <li><a href="services.html#audit">Технический аудит</a></li>
+                <li><a href="services.html#repair">Ремонт и сервис</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Контакты</h4>
+            <ul class="footer-contacts">
+                <li><i class="fa-solid fa-phone"></i> <a href="tel:+78005507514">8 (800) 550-75-14</a></li>
+                <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@princip-pro.ru">info@princip-pro.ru</a></li>
+                <li><i class="fa-solid fa-location-dot"></i> г. Краснодар</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Компания «Принцип-Про». Все права защищены.</p>
+    </div>
+</footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="callback-modal">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">Оставить заявку</h3>
+            <p class="modal-desc">Оставьте свои данные, и наш специалист свяжется с вами в течение 15 минут.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="Ваш телефон" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Жду звонка</button>
+                <p class="policy-text" style="font-size: 0.8rem; color: var(--text-secondary); text-align: center; margin-top: 1rem;">Нажимая кнопку, вы соглашаетесь с <a href="policy.html" style="color: var(--accent-color);">политикой конфиденциальности</a>.</p>
+            </form>
+        </div>
+    </div>
+
+        <!-- MAX Widget -->
+    <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" class="max-widget" target="_blank" aria-label="Написать в МАКС">
+        <img src="img/max-logo.png" alt="Чат МАКС">
+    </a>
+    <script src="js/script.js"></script>
+<a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" target="_blank" class="floating-chat" title="�������� � MAX">
+    <i class="fa-solid fa-comment-dots"></i>
+</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
