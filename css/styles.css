@@ -1,4 +1,4 @@
-/* CSS Variables & Reset */
+﻿/* CSS Variables & Reset */
 :root {
     --bg-primary: #ffffff;
     --bg-light: #f8f9fa;
@@ -1513,7 +1513,7 @@ body {
 }
 /* === REVAMP OVERRIDES: Animated neon glass + particles + cursor === */
 .hero { position: relative; min-height: 78vh; }
-.hero-canvas{ position:absolute; inset:0; z-index:5; pointer-events:none; mix-blend-mode:screen; opacity:0.95 }
+.hero-canvas{ position:absolute; inset:0; z-index:5; pointer-events:none;  opacity:0.95 }
 
 /* Ensure hero content sits under the particle overlay but above background */
 .hero-container{ position:relative; z-index:2 }
@@ -1538,7 +1538,7 @@ body {
 .routing-card:hover .card-inner{ transform:translateZ(18px) rotateX(4deg); box-shadow:0 30px 80px rgba(2,6,23,0.6) }
 
 /* Cursor */
-.custom-cursor{ position:fixed; left:0; top:0; width:14px; height:14px; border-radius:50%; transform:translate(-50%,-50%); z-index:4000; pointer-events:none; mix-blend-mode:screen; transition:width .15s ease,height .15s ease, transform .08s ease, opacity .18s }
+.custom-cursor{ position:fixed; left:0; top:0; width:14px; height:14px; border-radius:50%; transform:translate(-50%,-50%); z-index:4000; pointer-events:none;  transition:width .15s ease,height .15s ease, transform .08s ease, opacity .18s }
 .custom-cursor.big{ width:50px; height:50px; opacity:0.18 }
 
 /* Lightbox tweaks */
@@ -1556,4 +1556,5 @@ body {
 @media (max-width:768px){ .hero-title{ font-size:2.1rem } .routing-grid{ grid-template-columns:1fr } }
 
 /* end overrides */
+
 

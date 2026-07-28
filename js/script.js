@@ -362,13 +362,13 @@
             g.addColorStop(0.35, `hsla(${p.hue}, 60%, 50%, ${p.a*0.45})`);
             g.addColorStop(1, 'rgba(255,255,255,0)');
 
-            ctx.globalCompositeOperation = 'screen'; // keep soft and visible over text
+            // removed screen mode // keep soft and visible over text
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
             ctx.fill();
         }
-        ctx.globalCompositeOperation = 'source-over';
+        // restored source-over
         requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -465,5 +465,6 @@
 })();
 
 /* End of enhancements */
+
 
 
