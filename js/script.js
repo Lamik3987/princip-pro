@@ -266,3 +266,171 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/* === EXTRA: Particles, cursor, hero text, counters, tilt === */
+(function(){
+    // safe guards
+    const body = document.body;
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    // 1) PARTICLES CANVAS
+    const canvas = document.createElement('canvas');
+    canvas.className = 'hero-canvas particle-layer';
+    hero.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    let DPR = Math.max(1, window.devicePixelRatio || 1);
+
+    function resizeCanvas(){
+        canvas.width = Math.floor(hero.offsetWidth * DPR);
+        canvas.height = Math.floor(hero.offsetHeight * DPR);
+        canvas.style.width = hero.offsetWidth + 'px';
+        canvas.style.height = hero.offsetHeight + 'px';
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    window.addEventListener('resize', resizeCanvas, {passive:true});
+    resizeCanvas();
+
+    // particles
+    const particles = [];
+    const PARTICLE_COUNT = Math.max(18, Math.floor((hero.offsetWidth/120)));
+    function initParticles(){
+        particles.length = 0;
+        for(let i=0;i<PARTICLE_COUNT;i++){
+            particles.push({
+                x: Math.random()*canvas.width/DPR,
+                y: Math.random()*canvas.height/DPR,
+                r: 6 + Math.random()*18,
+                a: 0.05 + Math.random()*0.6,
+                vx: (Math.random()-0.5)*0.2,
+                vy: (Math.random()-0.5)*0.3,
+                hue: 160 + Math.random()*120
+            });
+        }
+    }
+    initParticles();
+
+    let last = performance.now();
+    function tick(t){
+        const dt = Math.min(40, t-last)/1000;
+        last = t;
+        ctx.clearRect(0,0,canvas.width/DPR,canvas.height/DPR);
+        for(const p of particles){
+            p.x += p.vx * (50*dt);
+            p.y += p.vy * (50*dt) + Math.sin(t/1000 + p.x)*0.02;
+
+            // wrap
+            if (p.x < -50) p.x = canvas.width/DPR + 50;
+            if (p.x > canvas.width/DPR + 50) p.x = -50;
+            if (p.y < -50) p.y = canvas.height/DPR + 50;
+            if (p.y > canvas.height/DPR + 50) p.y = -50;
+
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*1.8);
+            const color = `hsl(${p.hue}, 80%, 55%)`;
+            g.addColorStop(0, color);
+            g.addColorStop(0.35, color.replace('55%','30%'));
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // 2) CUSTOM CURSOR
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+    let mouseX=0, mouseY=0, cx=0, cy=0;
+    document.addEventListener('mousemove', (e)=>{ mouseX=e.clientX; mouseY=e.clientY; cursor.style.left = (e.clientX)+'px'; cursor.style.top = (e.clientY)+'px'; });
+    // enlarge on interactive elements
+    ['a','button','.btn','.project-item','.routing-card','.nav-link'].forEach(sel=>{
+        document.querySelectorAll(sel).forEach(el=>{
+            el.addEventListener('mouseenter', ()=>{ cursor.classList.add('big'); });
+            el.addEventListener('mouseleave', ()=>{ cursor.classList.remove('big'); });
+        });
+    });
+
+    // 3) HERO TITLE SPLIT & STAGGER
+    const title = document.querySelector('.hero-title');
+    if (title){
+        const text = title.textContent.trim();
+        title.textContent = '';
+        const frag = document.createDocumentFragment();
+        for(let i=0;i<text.length;i++){
+            const ch = document.createElement('span');
+            ch.className = 'char';
+            ch.textContent = (text[i] === ' ' ? '\u00A0' : text[i]);
+            ch.style.transitionDelay = (i*28)+'ms';
+            frag.appendChild(ch);
+        }
+        title.appendChild(frag);
+        // start animation when hero visible
+        const obs = new IntersectionObserver((entries, o)=>{
+            entries.forEach(e=>{ if (e.isIntersecting){ title.classList.add('animate'); o.disconnect(); } });
+        },{threshold:0.2});
+        obs.observe(title);
+    }
+
+    // 4) TILT EFFECT FOR .routing-card
+    document.querySelectorAll('.routing-card').forEach(card => {
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+        while(card.firstChild) inner.appendChild(card.firstChild);
+        card.appendChild(inner);
+
+        card.addEventListener('mousemove', (ev)=>{
+            const rect = card.getBoundingClientRect();
+            const px = (ev.clientX - rect.left) / rect.width;
+            const py = (ev.clientY - rect.top) / rect.height;
+            const rotY = (px - 0.5) * 12; // deg
+            const rotX = (0.5 - py) * 8;
+            inner.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(12px)`;
+        });
+        card.addEventListener('mouseleave', ()=>{ inner.style.transform = ''; });
+    });
+
+    // 5) COUNTERS
+    const counters = document.querySelectorAll('.number-value');
+    if (counters.length){
+        const counterObs = new IntersectionObserver((entries, o)=>{
+            entries.forEach(entry=>{
+                if (entry.isIntersecting){
+                    const el = entry.target;
+                    const target = parseInt(el.textContent.replace(/[^0-9]/g,'')) || 0;
+                    let v = 0; const dur = 1200; const start = performance.now();
+                    function step(now){
+                        const t = Math.min(1, (now-start)/dur);
+                        el.textContent = Math.floor(v + (target - v) * easeOutCubic(t));
+                        if (t < 1) requestAnimationFrame(step);
+                        else el.textContent = (target>=1000? (Math.round(target/100)/10+'k') : target);
+                    }
+                    requestAnimationFrame(step);
+                    o.unobserve(el);
+                }
+            });
+        },{threshold:0.3});
+        counters.forEach(c=> counterObs.observe(c));
+    }
+    function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+    // 6) make sure canvas resizes with hero changes
+    new ResizeObserver(() => {
+        resizeCanvas();
+        // re-init count if needed
+        if (particles.length < Math.max(14, Math.floor(hero.offsetWidth/120))) initParticles();
+    }).observe(hero);
+
+    // 7) keyboard accessibility: hide custom cursor on keyboard navigation
+    window.addEventListener('keydown', (e)=>{ if (e.key === 'Tab') cursor.style.display = 'none'; });
+    window.addEventListener('mousedown', ()=> cursor.style.display = 'block');
+
+})();
+
+/* End of enhancements */
+

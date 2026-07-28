@@ -1510,3 +1510,40 @@ body {
 .header-actions .phone-link {
     white-space: nowrap;
 }
+/* === REVAMP OVERRIDES: Animated neon glass + particles + cursor === */
+.hero { position: relative; min-height: 78vh; }
+.hero-canvas{ position:absolute; inset:0; z-index:0; pointer-events:none }
+.hero-container{ position:relative; z-index:2 }
+.hero-title{ font-size:3.2rem; font-weight:900; color:#fff; letter-spacing:-1px }
+.hero-title .char{ display:inline-block; opacity:0; transform:translateY(28px) rotateX(20deg); }
+.hero-title.animate .char{ animation:heroChar .7s cubic-bezier(.2,.9,.3,1) forwards; }
+@keyframes heroChar { to { opacity:1; transform:none } }
+
+/* Particles canvas covers hero */
+.hero .particle-layer{ position:absolute; inset:0; z-index:0 }
+
+/* Cards get 3D tilt and glossy highlight */
+.routing-card{ perspective:1200px }
+.routing-card .card-inner{ transition:transform .25s ease, box-shadow .25s ease; transform-style:preserve-3d }
+.routing-card:hover .card-inner{ transform:translateZ(18px) rotateX(4deg); box-shadow:0 30px 80px rgba(2,6,23,0.6) }
+
+/* Cursor */
+.custom-cursor{ position:fixed; left:0; top:0; width:14px; height:14px; border-radius:50%; transform:translate(-50%,-50%); z-index:4000; pointer-events:none; mix-blend-mode:screen; transition:width .15s ease,height .15s ease, transform .08s ease, opacity .18s }
+.custom-cursor.big{ width:50px; height:50px; opacity:0.18 }
+
+/* Lightbox tweaks */
+.lightbox{ background:radial-gradient(circle at center, rgba(0,0,0,0.8), rgba(0,0,0,0.95)); }
+.lightbox-img{ border-radius:10px }
+
+/* Animated counters */
+.number-value{ transition: all 0.6s ease; font-weight:900 }
+
+/* Toast style refinements */
+.toast{ background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); color:#fff }
+.toast .toast-icon{ color:var(--accent) }
+
+/* small screens */
+@media (max-width:768px){ .hero-title{ font-size:2.1rem } .routing-grid{ grid-template-columns:1fr } }
+
+/* end overrides */
+
