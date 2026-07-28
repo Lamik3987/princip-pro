@@ -291,47 +291,78 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas, {passive:true});
     resizeCanvas();
 
-    // particles
+    // particles (subtle, parallax-follow, always visible above content)
     const particles = [];
-    const PARTICLE_COUNT = Math.max(18, Math.floor((hero.offsetWidth/120)));
+    const PARTICLE_COUNT = Math.max(12, Math.floor((hero.offsetWidth/160)));
+
+    // track pointer for parallax
+    let pointer = { x: hero.offsetWidth/2, y: hero.offsetHeight/2 };
+    window.addEventListener('pointermove', (e)=>{
+        const rect = hero.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+    }, {passive:true});
+
     function initParticles(){
         particles.length = 0;
+        const w = canvas.width / DPR; const h = canvas.height / DPR;
         for(let i=0;i<PARTICLE_COUNT;i++){
+            const baseX = Math.random()*w;
+            const baseY = Math.random()*h;
             particles.push({
-                x: Math.random()*canvas.width/DPR,
-                y: Math.random()*canvas.height/DPR,
-                r: 6 + Math.random()*18,
-                a: 0.05 + Math.random()*0.6,
-                vx: (Math.random()-0.5)*0.2,
-                vy: (Math.random()-0.5)*0.3,
-                hue: 160 + Math.random()*120
+                baseX,
+                baseY,
+                x: baseX,
+                y: baseY,
+                r: 3 + Math.random()*8,           // smaller radius
+                a: 0.06 + Math.random()*0.12,     // low alpha
+                vx: (Math.random()-0.5)*0.06,
+                vy: (Math.random()-0.5)*0.06,
+                hue: 190 + Math.random()*60,
+                parallax: 0.02 + Math.random()*0.12 // how strongly follows pointer
             });
         }
     }
     initParticles();
 
     let last = performance.now();
+    let parallaxOffset = { x:0, y:0 };
     function tick(t){
         const dt = Math.min(40, t-last)/1000;
         last = t;
         ctx.clearRect(0,0,canvas.width/DPR,canvas.height/DPR);
+
+        // smooth parallax target toward pointer center
+        const cx = hero.offsetWidth/2; const cy = hero.offsetHeight/2;
+        const targetOffsetX = (pointer.x - cx) * 0.08; // sensitivity
+        const targetOffsetY = (pointer.y - cy) * 0.06;
+        parallaxOffset.x += (targetOffsetX - parallaxOffset.x) * 0.12;
+        parallaxOffset.y += (targetOffsetY - parallaxOffset.y) * 0.12;
+
         for(const p of particles){
-            p.x += p.vx * (50*dt);
-            p.y += p.vy * (50*dt) + Math.sin(t/1000 + p.x)*0.02;
+            // base oscillation
+            p.baseX += Math.sin((t/1000) + p.hue) * 0.02 * (p.r/4);
+            p.baseY += Math.cos((t/900) + p.hue) * 0.02 * (p.r/6);
 
-            // wrap
-            if (p.x < -50) p.x = canvas.width/DPR + 50;
-            if (p.x > canvas.width/DPR + 50) p.x = -50;
-            if (p.y < -50) p.y = canvas.height/DPR + 50;
-            if (p.y > canvas.height/DPR + 50) p.y = -50;
+            // position = base + small motion + parallax
+            p.x += ( (p.baseX + parallaxOffset.x * p.parallax) - p.x ) * 0.08 + p.vx;
+            p.y += ( (p.baseY + parallaxOffset.y * p.parallax) - p.y ) * 0.08 + p.vy;
 
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*1.8);
-            const color = `hsl(${p.hue}, 80%, 55%)`;
-            g.addColorStop(0, color);
-            g.addColorStop(0.35, color.replace('55%','30%'));
+            // wrap gently
+            const W = canvas.width/DPR; const H = canvas.height/DPR;
+            if (p.x < -30) p.x = W + 30;
+            if (p.x > W + 30) p.x = -30;
+            if (p.y < -30) p.y = H + 30;
+            if (p.y > H + 30) p.y = -30;
+
+            // subtle gradient, low alpha
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*2.2);
+            const baseColor = `hsla(${p.hue}, 65%, 60%, ${p.a})`;
+            g.addColorStop(0, baseColor);
+            g.addColorStop(0.35, `hsla(${p.hue}, 60%, 50%, ${p.a*0.45})`);
             g.addColorStop(1, 'rgba(255,255,255,0)');
 
-            ctx.globalCompositeOperation = 'lighter';
+            ctx.globalCompositeOperation = 'screen'; // keep soft and visible over text
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
@@ -341,6 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
+
 
     // 2) CUSTOM CURSOR
     const cursor = document.createElement('div');
