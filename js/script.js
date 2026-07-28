@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // particles (subtle, parallax-follow, always visible above content)
     const particles = [];
-    const PARTICLE_COUNT = Math.max(12, Math.floor((hero.offsetWidth/160)));
+    const PARTICLE_COUNT = Math.max(25, Math.floor((hero.offsetWidth/60)));
 
     // track pointer for parallax
     let pointer = { x: hero.offsetWidth/2, y: hero.offsetHeight/2 };
@@ -314,8 +314,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 baseY,
                 x: baseX,
                 y: baseY,
-                r: 3 + Math.random()*8,           // smaller radius
-                a: 0.06 + Math.random()*0.12,     // low alpha
+                r: 30 + Math.random()*80,           // larger radius (blobs)
+                a: 0.15 + Math.random()*0.3,     // more alpha
                 vx: (Math.random()-0.5)*0.06,
                 vy: (Math.random()-0.5)*0.06,
                 hue: 190 + Math.random()*60,
@@ -465,4 +465,5 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* End of enhancements */
+
 
