@@ -1512,7 +1512,16 @@ body {
 }
 /* === REVAMP OVERRIDES: Animated neon glass + particles + cursor === */
 .hero { position: relative; min-height: 78vh; }
-.hero-canvas{ position:absolute; inset:0; z-index:0; pointer-events:none }
+.hero-canvas{ position:absolute; inset:0; z-index:5; pointer-events:none; mix-blend-mode:screen; opacity:0.95 }
+
+/* Ensure hero content sits under the particle overlay but above background */
+.hero-container{ position:relative; z-index:2 }
+
+/* Ensure header/nav/dropdowns sit above particle layer so usability remains correct */
+.header{ z-index: 4000 }
+.nav{ z-index: 3500 }
+.dropdown{ z-index:3600 }
+
 .hero-container{ position:relative; z-index:2 }
 .hero-title{ font-size:3.2rem; font-weight:900; color:#fff; letter-spacing:-1px }
 .hero-title .char{ display:inline-block; opacity:0; transform:translateY(28px) rotateX(20deg); }
