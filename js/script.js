@@ -433,8 +433,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const py = (ev.clientY - rect.top) / rect.height;
             const rotY = (px - 0.5) * 12; // deg
             const rotX = (0.5 - py) * -12;
-            card.style.transform = `perspective(1200px) rotateY(${rotY}deg) rotateX(${rotX}deg) scale3d(1.02, 1.02, 1.02)`;
-            card.style.transition = `none`;
+            card.style.transform = `perspective(1200px) translateY(-12px) rotateY(${rotY}deg) rotateX(${rotX}deg) scale3d(1.05, 1.05, 1.05)`;
+            card.style.boxShadow = `0 30px 60px rgba(2,6,23,0.15)`;
+            card.style.transition = `transform 0.1s ease-out, box-shadow 0.1s ease-out`;
         });
         card.addEventListener('mouseleave', ()=>{ 
             card.style.transform = ''; 
