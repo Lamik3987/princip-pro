@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -357,10 +357,10 @@
 
             // subtle gradient without dirty grey halos
             const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*2.2);
-            const baseColor = hsla(${p.hue}, 65%, 60%, ${p.a});
+            const baseColor = `hsla(${p.hue}, 65%, 60%, ${p.a})`;
             g.addColorStop(0, baseColor);
-            g.addColorStop(0.35, hsla(${p.hue}, 60%, 50%, ${p.a*0.45}));
-            g.addColorStop(1, hsla(${p.hue}, 60%, 50%, 0)); // clean fade
+            g.addColorStop(0.35, `hsla(${p.hue}, 60%, 50%, ${p.a*0.45})`);
+            g.addColorStop(1, `hsla(${p.hue}, 60%, 50%, 0)`); // clean fade
 
             ctx.fillStyle = g;
             ctx.beginPath();
