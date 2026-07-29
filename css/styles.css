@@ -267,16 +267,6 @@ body {
     line-height: 1.1;
 }
 
-.hero-title span {
-    -webkit-text-stroke: 1px var(--text-primary);
-    color: transparent;
-    transition: color 0.5s ease;
-}
-
-.hero-title:hover span {
-    color: var(--text-primary);
-}
-
 .hero-subtitle {
     font-size: 1.25rem;
     color: var(--text-secondary);
@@ -1528,7 +1518,7 @@ body {
 .hero-title { 
     font-size: 3.2rem; 
     font-weight: 900; 
-    color: var(--text-primary); 
+    color: #000; 
     letter-spacing: -1px;
     display: flex;
     flex-wrap: wrap;
