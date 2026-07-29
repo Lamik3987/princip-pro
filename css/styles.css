@@ -1541,9 +1541,7 @@ body {
 .hero .particle-layer{ position:absolute; inset:0; z-index:0 }
 
 /* Cards get 3D tilt and glossy highlight */
-.routing-card{ perspective:1200px }
-.routing-card .card-inner{ transition:transform .25s ease, box-shadow .25s ease; transform-style:preserve-3d }
-.routing-card:hover .card-inner{ transform:translateZ(18px) rotateX(4deg); box-shadow:0 30px 80px rgba(2,6,23,0.6) }
+/* 3D Tilt moved purely to JS on routing-card directly */
 
 /* Cursor */
 .custom-cursor{ position:fixed; left:0; top:0; width:14px; height:14px; border-radius:50%; transform:translate(-50%,-50%); z-index:4000; pointer-events:none;  transition:width .15s ease,height .15s ease, transform .08s ease, opacity .18s }

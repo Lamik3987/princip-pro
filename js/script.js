@@ -427,20 +427,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4) TILT EFFECT FOR .routing-card
     document.querySelectorAll('.routing-card').forEach(card => {
-        const inner = document.createElement('div');
-        inner.className = 'card-inner';
-        while(card.firstChild) inner.appendChild(card.firstChild);
-        card.appendChild(inner);
-
         card.addEventListener('mousemove', (ev)=>{
             const rect = card.getBoundingClientRect();
             const px = (ev.clientX - rect.left) / rect.width;
             const py = (ev.clientY - rect.top) / rect.height;
             const rotY = (px - 0.5) * 12; // deg
-            const rotX = (0.5 - py) * 8;
-            inner.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(12px)`;
+            const rotX = (0.5 - py) * -12;
+            card.style.transform = `perspective(1200px) rotateY(${rotY}deg) rotateX(${rotX}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transition = `none`;
         });
-        card.addEventListener('mouseleave', ()=>{ inner.style.transform = ''; });
+        card.addEventListener('mouseleave', ()=>{ 
+            card.style.transform = ''; 
+            card.style.transition = `all 0.3s ease`;
+        });
     });
 
     // 5) COUNTERS
