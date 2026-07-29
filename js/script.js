@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -295,29 +295,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const particles = [];
     const PARTICLE_COUNT = Math.max(25, Math.floor((hero.offsetWidth/60)));
 
-    // track pointer for parallax
+    // track pointer for parallax (optimized: no layout thrashing)
     let pointer = { x: hero.offsetWidth/2, y: hero.offsetHeight/2 };
-    window.addEventListener('pointermove', (e)=>{
-        const rect = hero.getBoundingClientRect();
-        pointer.x = e.clientX - rect.left;
-        pointer.y = e.clientY - rect.top;
+    hero.addEventListener('pointermove', (e)=>{
+        // Use page coordinates minus hero offset instead of getBoundingClientRect
+        pointer.x = e.pageX - hero.offsetLeft;
+        pointer.y = e.pageY - hero.offsetTop;
     }, {passive:true});
 
     function initParticles(){
         particles.length = 0;
         const w = canvas.width / DPR; const h = canvas.height / DPR;
         for(let i=0;i<PARTICLE_COUNT;i++){
-            const baseX = Math.random()*w;
-            const baseY = Math.random()*h;
             particles.push({
-                baseX,
-                baseY,
-                x: baseX,
-                y: baseY,
+                x: Math.random()*w,
+                y: Math.random()*h,
+                baseX: Math.random()*w,
+                baseY: Math.random()*h,
                 r: 30 + Math.random()*80,           // larger radius (blobs)
-                a: 0.15 + Math.random()*0.3,     // more alpha
-                vx: (Math.random()-0.5)*0.06,
-                vy: (Math.random()-0.5)*0.06,
+                a: 0.15 + Math.random()*0.3,        // more alpha
+                vx: (Math.random()-0.5)*0.8,        // proper velocity
+                vy: (Math.random()-0.5)*0.8,
                 hue: 190 + Math.random()*60,
                 parallax: 0.02 + Math.random()*0.12 // how strongly follows pointer
             });
@@ -339,40 +337,39 @@ document.addEventListener('DOMContentLoaded', () => {
         parallaxOffset.x += (targetOffsetX - parallaxOffset.x) * 0.12;
         parallaxOffset.y += (targetOffsetY - parallaxOffset.y) * 0.12;
 
+        const W = canvas.width/DPR; const H = canvas.height/DPR;
+
         for(const p of particles){
-            // base oscillation
-            p.baseX += Math.sin((t/1000) + p.hue) * 0.02 * (p.r/4);
-            p.baseY += Math.cos((t/900) + p.hue) * 0.02 * (p.r/6);
+            // true movement physics
+            p.baseX += p.vx;
+            p.baseY += p.vy;
 
-            // position = base + small motion + parallax
-            p.x += ( (p.baseX + parallaxOffset.x * p.parallax) - p.x ) * 0.08 + p.vx;
-            p.y += ( (p.baseY + parallaxOffset.y * p.parallax) - p.y ) * 0.08 + p.vy;
+            // wrap gently using safe bounds for large blobs
+            const limit = p.r * 2.5;
+            if (p.baseX < -limit) p.baseX = W + limit;
+            if (p.baseX > W + limit) p.baseX = -limit;
+            if (p.baseY < -limit) p.baseY = H + limit;
+            if (p.baseY > H + limit) p.baseY = -limit;
 
-            // wrap gently
-            const W = canvas.width/DPR; const H = canvas.height/DPR;
-            if (p.x < -30) p.x = W + 30;
-            if (p.x > W + 30) p.x = -30;
-            if (p.y < -30) p.y = H + 30;
-            if (p.y > H + 30) p.y = -30;
+            // calculate draw position (base + parallax)
+            p.x += ( (p.baseX + parallaxOffset.x * p.parallax) - p.x ) * 0.15;
+            p.y += ( (p.baseY + parallaxOffset.y * p.parallax) - p.y ) * 0.15;
 
-            // subtle gradient, low alpha
+            // subtle gradient without dirty grey halos
             const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*2.2);
-            const baseColor = `hsla(${p.hue}, 65%, 60%, ${p.a})`;
+            const baseColor = hsla(${p.hue}, 65%, 60%, ${p.a});
             g.addColorStop(0, baseColor);
-            g.addColorStop(0.35, `hsla(${p.hue}, 60%, 50%, ${p.a*0.45})`);
-            g.addColorStop(1, 'rgba(255,255,255,0)');
+            g.addColorStop(0.35, hsla(${p.hue}, 60%, 50%, ${p.a*0.45}));
+            g.addColorStop(1, hsla(${p.hue}, 60%, 50%, 0)); // clean fade
 
-            // removed screen mode // keep soft and visible over text
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
             ctx.fill();
         }
-        // restored source-over
         requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-
 
     // 2) CUSTOM CURSOR
     const cursor = document.createElement('div');
@@ -473,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new ResizeObserver(() => {
         resizeCanvas();
         // re-init count if needed
-        if (particles.length < Math.max(14, Math.floor(hero.offsetWidth/120))) initParticles();
+        // resize re-init disabled for smooth transition
     }).observe(hero);
 
     // 7) keyboard accessibility: hide custom cursor on keyboard navigation
@@ -483,6 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* End of enhancements */
+
 
 
 
