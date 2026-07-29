@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -395,11 +395,17 @@
         title.textContent = '';
         const frag = document.createDocumentFragment();
         for(let i=0;i<text.length;i++){
+            const wrapper = document.createElement('span');
+            wrapper.className = 'char-wrapper';
+            if (text[i] === ' ') wrapper.style.width = '0.3em';
+            
             const ch = document.createElement('span');
             ch.className = 'char';
             ch.textContent = (text[i] === ' ' ? '\u00A0' : text[i]);
             ch.style.transitionDelay = (i*28)+'ms';
-            frag.appendChild(ch);
+            
+            wrapper.appendChild(ch);
+            frag.appendChild(wrapper);
         }
         title.appendChild(frag);
         // start animation when hero visible
