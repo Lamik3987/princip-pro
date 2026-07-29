@@ -346,10 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // wrap gently using safe bounds for large blobs
             const limit = p.r * 2.5;
-            if (p.baseX < -limit) p.baseX = W + limit;
-            if (p.baseX > W + limit) p.baseX = -limit;
-            if (p.baseY < -limit) p.baseY = H + limit;
-            if (p.baseY > H + limit) p.baseY = -limit;
+            if (p.baseX < -limit) { p.baseX += (W + limit*2); p.x += (W + limit*2); }
+            else if (p.baseX > W + limit) { p.baseX -= (W + limit*2); p.x -= (W + limit*2); }
+            
+            if (p.baseY < -limit) { p.baseY += (H + limit*2); p.y += (H + limit*2); }
+            else if (p.baseY > H + limit) { p.baseY -= (H + limit*2); p.y -= (H + limit*2); }
 
             // calculate draw position (base + parallax)
             p.x += ( (p.baseX + parallaxOffset.x * p.parallax) - p.x ) * 0.15;
