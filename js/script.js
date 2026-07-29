@@ -393,20 +393,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (title){
         const text = title.textContent.trim();
         title.textContent = '';
+        const words = text.split(' ');
+        let charIndex = 0;
         const frag = document.createDocumentFragment();
-        for(let i=0;i<text.length;i++){
-            const wrapper = document.createElement('span');
-            wrapper.className = 'char-wrapper';
-            if (text[i] === ' ') wrapper.style.width = '0.3em';
+        
+        words.forEach((word, wordIndex) => {
+            const wordWrapper = document.createElement('span');
+            wordWrapper.className = 'word-wrapper';
+            wordWrapper.style.display = 'inline-flex';
+            wordWrapper.style.whiteSpace = 'nowrap';
+            wordWrapper.style.marginRight = '0.3em'; // replace space character with margin
             
-            const ch = document.createElement('span');
-            ch.className = 'char';
-            ch.textContent = (text[i] === ' ' ? '\u00A0' : text[i]);
-            ch.style.transitionDelay = (i*28)+'ms';
-            
-            wrapper.appendChild(ch);
-            frag.appendChild(wrapper);
-        }
+            for(let i=0; i<word.length; i++){
+                const wrapper = document.createElement('span');
+                wrapper.className = 'char-wrapper';
+                
+                const ch = document.createElement('span');
+                ch.className = 'char';
+                ch.textContent = word[i];
+                ch.style.transitionDelay = (charIndex * 28) + 'ms';
+                
+                wrapper.appendChild(ch);
+                wordWrapper.appendChild(wrapper);
+                charIndex++;
+            }
+            frag.appendChild(wordWrapper);
+        });
         title.appendChild(frag);
         // start animation when hero visible
         const obs = new IntersectionObserver((entries, o)=>{
