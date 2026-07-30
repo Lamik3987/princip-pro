@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 a: 0.15 + Math.random()*0.3,        // more alpha
                 vx: (Math.random()-0.5)*0.8,        // proper velocity
                 vy: (Math.random()-0.5)*0.8,
-                hue: 190 + Math.random()*60,
+                hue: 186 + Math.random()*28,
                 parallax: 0.02 + Math.random()*0.12 // how strongly follows pointer
             });
         }
@@ -481,6 +481,42 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* End of enhancements */
+
+/* ── MONITOR WIDGET — live value updates ─────────────── */
+(function(){
+    var monVals = document.querySelectorAll('.mon-val[data-mon]');
+    if (!monVals.length) return;
+
+    var params = {
+        cl:   { base: 1.24, range: 0.09, dec: 2 },
+        ph:   { base: 7.42, range: 0.05, dec: 2 },
+        flow: { base: 11.8, range: 0.7,  dec: 1 },
+        temp: { base: 18.3, range: 0.25, dec: 1 }
+    };
+    var barBases = { cl: 58, ph: 72, flow: 44, temp: 35 };
+    var barEls   = {};
+
+    document.querySelectorAll('.monitor-row').forEach(function(row){
+        var v = row.querySelector('.mon-val');
+        if (!v) return;
+        var key = v.getAttribute('data-mon');
+        if (key) barEls[key] = row.querySelector('.mon-fill');
+    });
+
+    function jitter(base, range){ return base + (Math.random() - 0.5) * range * 2; }
+
+    function tick(){
+        monVals.forEach(function(el){
+            var key = el.getAttribute('data-mon');
+            var p = params[key]; if (!p) return;
+            el.textContent = jitter(p.base, p.range).toFixed(p.dec);
+            var bar = barEls[key];
+            if (bar) bar.style.width = Math.max(12, Math.min(96, jitter(barBases[key], 7))).toFixed(0) + '%';
+        });
+    }
+
+    setTimeout(function(){ tick(); setInterval(tick, 2800); }, 1400);
+})();
 
 
 
