@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отзывы | Принцип-Про</title>
-    <meta name="description" content="Отзывы и благодарственные письма от клиентов компании «Принцип-Про». Опыт сотрудничества и оценка качества наших услуг.">
-    <meta property="og:title" content="Отзывы клиентов | Принцип-Про">
-    <meta property="og:description" content="Отзывы и благодарственные письма от клиентов компании «Принцип-Про». Опыт сотрудничества и оценка качества наших услуг.">
+    <title>Отзывы | Принцип.pro</title>
+    <meta name="description" content="Отзывы и благодарственные письма от клиентов компании «Принцип.pro». Опыт сотрудничества и оценка качества наших услуг.">
+    <meta property="og:title" content="Отзывы клиентов | Принцип.pro">
+    <meta property="og:description" content="Отзывы и благодарственные письма от клиентов компании «Принцип.pro». Опыт сотрудничества и оценка качества наших услуг.">
     <meta property="og:type" content="website">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=5">
     <style>
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         .review-card { padding: 2rem; background: var(--bg-light); border-radius: 12px; border: 1px solid var(--border-color); }
@@ -33,7 +33,7 @@
 <body>
 <header class="header">
     <div class="container header-container">
-        <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип.pro"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП.PRO</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
         <nav class="nav" id="nav-menu">
             <ul class="nav-list">
                 <li class="nav-item has-dropdown">
@@ -73,7 +73,7 @@
         <div class="header-actions">
             <a href="tel:+78005507514" class="phone-link">8 (800) 550-75-14</a>
             <a href="contact.html" class="btn btn-outline header-btn">Заказать звонок</a>
-            <button class="burger" id="burger-btn" aria-label="Открыть меню"><i class="fa-solid fa-bars"></i></button>
+                <button class="burger" id="burger-btn" type="button" aria-label="Открыть меню" aria-controls="nav-menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
 </header>
@@ -91,24 +91,25 @@
 
     <section class="section reveal">
         <div class="container">
+            <h2 class="sr-only">Отзывы наших клиентов</h2>
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Иван Петрович</h4>
+                            <h3>Иван Петрович</h3>
                             <p class="review-role">Главный инженер, ООО «Агропром»</p>
                         </div>
                     </div>
                     <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="review-text">"Работаем с Принцип-Про уже третий год. Система водоподготовки на нашем предприятии работает безупречно. Сервис оперативный, всегда на связи."</p>
+                    <p class="review-text">"Работаем с Принцип.pro уже третий год. Система водоподготовки на нашем предприятии работает безупречно. Сервис оперативный, всегда на связи."</p>
                 </div>
                 
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Елена Соколова</h4>
+                            <h3>Елена Соколова</h3>
                             <p class="review-role">Владелец коттеджа</p>
                         </div>
                     </div>
@@ -120,7 +121,7 @@
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Алексей Николаев</h4>
+                            <h3>Алексей Николаев</h3>
                             <p class="review-role">Гл. инженер, МУП «Водоканал»</p>
                         </div>
                     </div>
@@ -132,7 +133,7 @@
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Марина Волкова</h4>
+                            <h3>Марина Волкова</h3>
                             <p class="review-role">Технолог, ООО «Молпром»</p>
                         </div>
                     </div>
@@ -144,7 +145,7 @@
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Дмитрий Кузнецов</h4>
+                            <h3>Дмитрий Кузнецов</h3>
                             <p class="review-role">Управляющий КП «Сосновый бор»</p>
                         </div>
                     </div>
@@ -156,7 +157,7 @@
                     <div class="review-header">
                         <div class="review-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h4>Ольга Михайлова</h4>
+                            <h3>Ольга Михайлова</h3>
                             <p class="review-role">Директор, ООО «Водные ресурсы»</p>
                         </div>
                     </div>
@@ -177,16 +178,15 @@
 <footer class="footer">
     <div class="container footer-container">
         <div class="footer-col brand-col">
-            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип.pro"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП.PRO</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
             <p class="footer-desc">Проектирование и производство оборудования для очистки и подготовки воды.</p>
             <div class="socials">
-                <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
                 <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" aria-label="MAX Chat" target="_blank" title="Написать в MAX"><i class="fa-solid fa-comment-dots"></i></a>
                 <a href="#" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
             </div>
         </div>
         <div class="footer-col">
-            <h4>Навигация</h4>
+                <p class="footer-title">Навигация</p>
             <ul class="footer-links">
                 <li><a href="services.html">Услуги</a></li>
                 <li><a href="equipment.html">Оборудование</a></li>
@@ -197,7 +197,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4>Услуги</h4>
+                <p class="footer-title">Услуги</p>
             <ul class="footer-links">
                 <li><a href="services.html#design">Проектирование</a></li>
                 <li><a href="services.html#montazh">Монтаж</a></li>
@@ -206,7 +206,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4>Контакты</h4>
+                <p class="footer-title">Контакты</p>
             <ul class="footer-contacts">
                 <li><i class="fa-solid fa-phone"></i> <a href="tel:+78005507514">8 (800) 550-75-14</a></li>
                 <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@princip-pro.ru">info@princip-pro.ru</a></li>
@@ -215,7 +215,7 @@
         </div>
     </div>
     <div class="container footer-bottom">
-        <p>&copy; 2026 Компания «Принцип-Про». Все права защищены.</p>
+        <p>&copy; 2026 Компания «Принцип.pro». Все права защищены.</p>
     </div>
 </footer>
 
@@ -240,7 +240,7 @@
 
         <!-- MAX Widget -->
     
-    <script src="js/script.js"></script>
+    <script src="js/script.js?v=5"></script>
 <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" target="_blank" class="floating-chat" title="Написать в MAX">
     <i class="fa-solid fa-comment-dots"></i>
 </a>
