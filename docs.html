@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документация | Принцип-Про</title>
-    <meta name="description" content="Сертификаты качества, лицензии, ГОСТы и техническая документация компании «Принцип-Про».">
-    <meta property="og:title" content="Документация | Принцип-Про">
-    <meta property="og:description" content="Сертификаты качества, лицензии, ГОСТы и техническая документация компании «Принцип-Про».">
+    <title>Документация | Принцип.pro</title>
+    <meta name="description" content="Сертификаты качества, лицензии, ГОСТы и техническая документация компании «Принцип.pro».">
+    <meta property="og:title" content="Документация | Принцип.pro">
+    <meta property="og:description" content="Сертификаты качества, лицензии, ГОСТы и техническая документация компании «Принцип.pro».">
     <meta property="og:type" content="website">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=5">
     <style>
         .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .doc-card { padding: 2.5rem 2rem; background: var(--bg-light); border-radius: 12px; border: 1px solid var(--border-color); text-align: center; transition: all 0.3s ease; }
@@ -30,7 +30,7 @@
 <body>
 <header class="header">
     <div class="container header-container">
-        <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип.pro"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП.PRO</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
         <nav class="nav" id="nav-menu">
             <ul class="nav-list">
                 <li class="nav-item has-dropdown">
@@ -70,7 +70,7 @@
         <div class="header-actions">
             <a href="tel:+78005507514" class="phone-link">8 (800) 550-75-14</a>
             <a href="contact.html" class="btn btn-outline header-btn">Заказать звонок</a>
-            <button class="burger" id="burger-btn" aria-label="Открыть меню"><i class="fa-solid fa-bars"></i></button>
+                <button class="burger" id="burger-btn" type="button" aria-label="Открыть меню" aria-controls="nav-menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
 </header>
@@ -88,40 +88,41 @@
 
     <section class="section reveal">
         <div class="container">
+            <h2 class="sr-only">Документы компании</h2>
             <div class="docs-grid">
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-file-shield"></i></div>
-                    <h4>Сертификат соответствия</h4>
+                    <h3>Сертификат соответствия</h3>
                     <p>Подтверждает соответствие оборудования ГОСТам РФ.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-stamp"></i></div>
-                    <h4>СРО и лицензии</h4>
+                    <h3>СРО и лицензии</h3>
                     <p>Допуск СРО на проектирование и строительство.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-file-medical"></i></div>
-                    <h4>Санитарно-эпидемиологическое заключение</h4>
+                    <h3>Санитарно-эпидемиологическое заключение</h3>
                     <p>СэЗ на продукцию, контактирующую с питьевой водой.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-certificate"></i></div>
-                    <h4>Сертификат ISO 9001</h4>
+                    <h3>Сертификат ISO 9001</h3>
                     <p>Система менеджмента качества.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-book"></i></div>
-                    <h4>Технические паспорта</h4>
+                    <h3>Технические паспорта</h3>
                     <p>Паспорта изделий и руководства по эксплуатации.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <h4>ГОСТы и СанПиНы</h4>
+                    <h3>ГОСТы и СанПиНы</h3>
                     <p>Нормативные документы, которым соответствует наша продукция.</p>
                     <a href="#" class="doc-download"><i class="fa-solid fa-download"></i> Скачать PDF</a>
                 </div>
@@ -133,16 +134,15 @@
 <footer class="footer">
     <div class="container footer-container">
         <div class="footer-col brand-col">
-            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Icon"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
+            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип.pro"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП.PRO</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
             <p class="footer-desc">Проектирование и производство оборудования для очистки и подготовки воды.</p>
             <div class="socials">
-                <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
                 <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" aria-label="MAX Chat" target="_blank" title="Написать в MAX"><i class="fa-solid fa-comment-dots"></i></a>
                 <a href="#" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
             </div>
         </div>
         <div class="footer-col">
-            <h4>Навигация</h4>
+                <p class="footer-title">Навигация</p>
             <ul class="footer-links">
                 <li><a href="services.html">Услуги</a></li>
                 <li><a href="equipment.html">Оборудование</a></li>
@@ -153,7 +153,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4>Услуги</h4>
+                <p class="footer-title">Услуги</p>
             <ul class="footer-links">
                 <li><a href="services.html#design">Проектирование</a></li>
                 <li><a href="services.html#montazh">Монтаж</a></li>
@@ -162,7 +162,7 @@
             </ul>
         </div>
         <div class="footer-col">
-            <h4>Контакты</h4>
+                <p class="footer-title">Контакты</p>
             <ul class="footer-contacts">
                 <li><i class="fa-solid fa-phone"></i> <a href="tel:+78005507514">8 (800) 550-75-14</a></li>
                 <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@princip-pro.ru">info@princip-pro.ru</a></li>
@@ -171,7 +171,7 @@
         </div>
     </div>
     <div class="container footer-bottom">
-        <p>&copy; 2026 Компания «Принцип-Про». Все права защищены.</p>
+        <p>&copy; 2026 Компания «Принцип.pro». Все права защищены.</p>
     </div>
 </footer>
     <!-- Modal -->
@@ -195,7 +195,7 @@
 
         <!-- MAX Widget -->
     
-    <script src="js/script.js"></script>
+    <script src="js/script.js?v=5"></script>
 <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" target="_blank" class="floating-chat" title="Написать в MAX">
     <i class="fa-solid fa-comment-dots"></i>
 </a>

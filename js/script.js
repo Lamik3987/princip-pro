@@ -5,10 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     let menuOpen = false;
 
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(control => {
+        if (!control.hasAttribute('aria-label')) {
+            control.setAttribute('aria-label', control.getAttribute('placeholder'));
+        }
+    });
+
     if (burgerBtn) {
         burgerBtn.addEventListener('click', () => {
             menuOpen = !menuOpen;
             navMenu.classList.toggle('active');
+            burgerBtn.setAttribute('aria-expanded', String(menuOpen));
+            burgerBtn.setAttribute('aria-label', menuOpen ? 'Закрыть меню' : 'Открыть меню');
             
             // Icon swap bars/xmark
             if (menuOpen) {
@@ -20,6 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    function closeMobileMenu() {
+        if (!menuOpen) return;
+        menuOpen = false;
+        navMenu.classList.remove('active');
+        burgerBtn.setAttribute('aria-expanded', 'false');
+        burgerBtn.setAttribute('aria-label', 'Открыть меню');
+        burgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMobileMenu();
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1100) closeMobileMenu();
+    });
 
     // 2. Close nav on link click
     const navLinks = document.querySelectorAll('.nav-link:not(.has-dropdown > .nav-link), .dropdown-link');
@@ -66,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownParents = document.querySelectorAll('.has-dropdown > .nav-link');
     dropdownParents.forEach(parent => {
         parent.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1100) {
                 e.preventDefault();
                 const dropdown = parent.nextElementSibling;
                 if (dropdown && dropdown.classList.contains('dropdown')) {
@@ -76,36 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. Form submission handler
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = form.querySelector('button[type="submit"]') || form.querySelector('.btn');
-            
-            if (submitBtn) {
-                const originalText = submitBtn.textContent;
-                const originalBg = submitBtn.style.backgroundColor;
-                
-                // Visual feedback
-                submitBtn.textContent = 'Отправлено!';
-                submitBtn.style.backgroundColor = 'var(--accent-color)'; // Success color
-                submitBtn.style.color = '#fff';
-                
-                // Reset form
-                form.reset();
-                
-                // Reset button after 3s
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.backgroundColor = '';
-                    submitBtn.style.color = '';
-                }, 3000);
-            }
-        });
-    });
-
-    // 7. Scroll reveal animations
+    // 6. Scroll reveal animations
     const revealElements = document.querySelectorAll('.reveal');
     
     // Add .reveal class to major sections if they don't have it (fallback)
@@ -273,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const hero = document.querySelector('.hero');
     if (!hero) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     // 1) PARTICLES CANVAS
     const canvas = document.createElement('canvas');
@@ -450,13 +448,24 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry=>{
                 if (entry.isIntersecting){
                     const el = entry.target;
-                    const target = parseInt(el.textContent.replace(/[^0-9]/g,'')) || 0;
-                    let v = 0; const dur = 1200; const start = performance.now();
+                    const original = el.textContent.trim();
+                    if (original.includes('/')) {
+                        o.unobserve(el);
+                        return;
+                    }
+                    const match = original.match(/^(\d+)(.*)$/);
+                    if (!match) {
+                        o.unobserve(el);
+                        return;
+                    }
+                    const target = parseInt(match[1], 10);
+                    const suffix = match[2];
+                    const dur = 1200; const start = performance.now();
                     function step(now){
                         const t = Math.min(1, (now-start)/dur);
-                        el.textContent = Math.floor(v + (target - v) * easeOutCubic(t));
+                        el.textContent = Math.floor(target * easeOutCubic(t)) + suffix;
                         if (t < 1) requestAnimationFrame(step);
-                        else el.textContent = (target>=1000? (Math.round(target/100)/10+'k') : target);
+                        else el.textContent = original;
                     }
                     requestAnimationFrame(step);
                     o.unobserve(el);
@@ -481,43 +490,4 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* End of enhancements */
-
-/* ── MONITOR WIDGET — live value updates ─────────────── */
-(function(){
-    var monVals = document.querySelectorAll('.mon-val[data-mon]');
-    if (!monVals.length) return;
-
-    var params = {
-        cl:   { base: 1.24, range: 0.09, dec: 2 },
-        ph:   { base: 7.42, range: 0.05, dec: 2 },
-        flow: { base: 11.8, range: 0.7,  dec: 1 },
-        temp: { base: 18.3, range: 0.25, dec: 1 }
-    };
-    var barBases = { cl: 58, ph: 72, flow: 44, temp: 35 };
-    var barEls   = {};
-
-    document.querySelectorAll('.monitor-row').forEach(function(row){
-        var v = row.querySelector('.mon-val');
-        if (!v) return;
-        var key = v.getAttribute('data-mon');
-        if (key) barEls[key] = row.querySelector('.mon-fill');
-    });
-
-    function jitter(base, range){ return base + (Math.random() - 0.5) * range * 2; }
-
-    function tick(){
-        monVals.forEach(function(el){
-            var key = el.getAttribute('data-mon');
-            var p = params[key]; if (!p) return;
-            el.textContent = jitter(p.base, p.range).toFixed(p.dec);
-            var bar = barEls[key];
-            if (bar) bar.style.width = Math.max(12, Math.min(96, jitter(barBases[key], 7))).toFixed(0) + '%';
-        });
-    }
-
-    setTimeout(function(){ tick(); setInterval(tick, 2800); }, 1400);
-})();
-
-
-
 
