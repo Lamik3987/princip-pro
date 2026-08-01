@@ -62,6 +62,96 @@
 
     <main>
         <section class="hero">
+            <!-- Advanced Water Visualization -->
+            <div class="water-viz-container">
+                <svg class="water-viz-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <!-- Gradients for depth -->
+                        <linearGradient id="water-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#b3e5fc;stop-opacity:0.4" />
+                            <stop offset="50%" style="stop-color:#4dd0e1;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#0097a7;stop-opacity:0.25" />
+                        </linearGradient>
+                        <linearGradient id="water-gradient-2" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#80deea;stop-opacity:0.35" />
+                            <stop offset="100%" style="stop-color:#26c6da;stop-opacity:0.25" />
+                        </linearGradient>
+                        <linearGradient id="water-gradient-3" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4fc3f7;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#0288d1;stop-opacity:0.2" />
+                        </linearGradient>
+                        <radialGradient id="bubble-gradient">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.7" />
+                            <stop offset="70%" style="stop-color:#e1f5fe;stop-opacity:0.4" />
+                            <stop offset="100%" style="stop-color:#b3e5fc;stop-opacity:0" />
+                        </radialGradient>
+                        <!-- Filter for glow -->
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Background layer waves -->
+                    <g class="wave-layer-back">
+                        <path class="wave-path wave-path-1" fill="url(#water-gradient-3)" d="M0,400 Q350,350 700,400 T1400,400 L1400,800 L0,800 Z">
+                            <animate attributeName="d"
+                                dur="12s"
+                                repeatCount="indefinite"
+                                values="M0,400 Q350,350 700,400 T1400,400 L1400,800 L0,800 Z;
+                                        M0,380 Q350,430 700,380 T1400,380 L1400,800 L0,800 Z;
+                                        M0,400 Q350,350 700,400 T1400,400 L1400,800 L0,800 Z"/>
+                        </path>
+                    </g>
+
+                    <!-- Middle layer waves -->
+                    <g class="wave-layer-mid">
+                        <path class="wave-path wave-path-2" fill="url(#water-gradient-2)" d="M0,450 Q400,400 800,450 T1600,450 L1600,800 L0,800 Z">
+                            <animate attributeName="d"
+                                dur="15s"
+                                repeatCount="indefinite"
+                                values="M0,450 Q400,400 800,450 T1600,450 L1600,800 L0,800 Z;
+                                        M0,470 Q400,420 800,470 T1600,470 L1600,800 L0,800 Z;
+                                        M0,450 Q400,400 800,450 T1600,450 L1600,800 L0,800 Z"/>
+                        </path>
+                    </g>
+
+                    <!-- Front layer waves -->
+                    <g class="wave-layer-front">
+                        <path class="wave-path wave-path-3" fill="url(#water-gradient-1)" d="M0,500 Q300,480 600,500 T1200,500 L1200,800 L0,800 Z">
+                            <animate attributeName="d"
+                                dur="18s"
+                                repeatCount="indefinite"
+                                values="M0,500 Q300,480 600,500 T1200,500 L1200,800 L0,800 Z;
+                                        M0,520 Q300,500 600,520 T1200,520 L1200,800 L0,800 Z;
+                                        M0,500 Q300,480 600,500 T1200,500 L1200,800 L0,800 Z"/>
+                        </path>
+                    </g>
+
+                    <!-- Bubbles -->
+                    <g class="bubbles-layer"></g>
+
+                    <!-- Light reflections -->
+                    <g class="light-reflections">
+                        <ellipse cx="200" cy="300" rx="80" ry="120" fill="url(#bubble-gradient)" opacity="0.6">
+                            <animate attributeName="cy" dur="8s" repeatCount="indefinite" values="300;280;300"/>
+                        </ellipse>
+                        <ellipse cx="800" cy="250" rx="100" ry="150" fill="url(#bubble-gradient)" opacity="0.5">
+                            <animate attributeName="cy" dur="10s" repeatCount="indefinite" values="250;230;250"/>
+                        </ellipse>
+                        <ellipse cx="1100" cy="350" rx="70" ry="100" fill="url(#bubble-gradient)" opacity="0.4">
+                            <animate attributeName="cy" dur="9s" repeatCount="indefinite" values="350;330;350"/>
+                        </ellipse>
+                    </g>
+                </svg>
+
+                <!-- Engineering grid overlay -->
+                <div class="engineering-grid"></div>
+            </div>
+
             <div class="container hero-container">
                 <div class="hero-content">
                     <span class="hero-badge">
@@ -90,6 +180,107 @@
                             <span class="hero-meta-val">50+</span>
                             <span class="hero-meta-lbl">регионов</span>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Water Treatment Process Flow - Engineering Installation -->
+                <div class="water-process-installation">
+                    <div class="installation-container">
+                        <div class="installation-title">Технологический процесс</div>
+
+                        <!-- Pipeline system -->
+                        <svg class="pipeline-svg" viewBox="0 0 540 320" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <linearGradient id="pipe-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#b0bec5;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#cfd8dc;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#b0bec5;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#00bcd4;stop-opacity:0.8" />
+                                    <stop offset="50%" style="stop-color:#0097a7;stop-opacity:0.9" />
+                                    <stop offset="100%" style="stop-color:#00838f;stop-opacity:0.8" />
+                                </linearGradient>
+                                <filter id="pipe-shadow">
+                                    <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                                    <feOffset dx="0" dy="2" result="offsetblur"/>
+                                    <feComponentTransfer>
+                                        <feFuncA type="linear" slope="0.3"/>
+                                    </feComponentTransfer>
+                                    <feMerge>
+                                        <feMergeNode/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Main pipeline structure -->
+                            <g class="pipeline-structure">
+                                <!-- Horizontal pipes -->
+                                <rect x="70" y="75" width="100" height="12" rx="6" fill="url(#pipe-gradient)" filter="url(#pipe-shadow)"/>
+                                <rect x="210" y="75" width="100" height="12" rx="6" fill="url(#pipe-gradient)" filter="url(#pipe-shadow)"/>
+                                <rect x="350" y="75" width="100" height="12" rx="6" fill="url(#pipe-gradient)" filter="url(#pipe-shadow)"/>
+
+                                <!-- Flow animation -->
+                                <rect class="water-flow flow-1" x="70" y="77" width="0" height="8" rx="4" fill="url(#flow-gradient)">
+                                    <animate attributeName="width" from="0" to="100" dur="0.8s" fill="freeze" begin="0.5s"/>
+                                </rect>
+                                <rect class="water-flow flow-2" x="210" y="77" width="0" height="8" rx="4" fill="url(#flow-gradient)">
+                                    <animate attributeName="width" from="0" to="100" dur="0.8s" fill="freeze" begin="1.3s"/>
+                                </rect>
+                                <rect class="water-flow flow-3" x="350" y="77" width="0" height="8" rx="4" fill="url(#flow-gradient)">
+                                    <animate attributeName="width" from="0" to="100" dur="0.8s" fill="freeze" begin="2.1s"/>
+                                </rect>
+                            </g>
+
+                            <!-- Stage 1: Raw Water -->
+                            <g class="process-stage stage-1" data-stage="1">
+                                <circle cx="40" cy="81" r="32" fill="#ffffff" stroke="#079bd3" stroke-width="3" filter="url(#pipe-shadow)"/>
+                                <path d="M40 65 C40 65 32 73 32 79 C32 83.4 35.6 87 40 87 C44.4 87 48 83.4 48 79 C48 73 40 65 40 65 Z"
+                                      fill="#079bd3" opacity="0.7"/>
+                                <text x="40" y="120" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">Исходная</text>
+                                <text x="40" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">вода</text>
+                            </g>
+
+                            <!-- Stage 2: Electrolysis -->
+                            <g class="process-stage stage-2" data-stage="2">
+                                <circle cx="180" cy="81" r="32" fill="#ffffff" stroke="#90a4ae" stroke-width="3" filter="url(#pipe-shadow)"/>
+                                <path d="M180 68 L184 76 L176 76 L180 68 Z M180 86 L176 94 L184 94 L180 86 Z"
+                                      fill="#546e7a" opacity="0.7"/>
+                                <circle cx="180" cy="81" r="3" fill="#546e7a"/>
+                                <text x="180" y="120" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">Электро-</text>
+                                <text x="180" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">лиз</text>
+                            </g>
+
+                            <!-- Stage 3: Filtration -->
+                            <g class="process-stage stage-3" data-stage="3">
+                                <circle cx="320" cy="81" r="32" fill="#ffffff" stroke="#90a4ae" stroke-width="3" filter="url(#pipe-shadow)"/>
+                                <rect x="308" y="70" width="24" height="22" rx="2" stroke="#546e7a" stroke-width="1.5" fill="none"/>
+                                <line x1="312" y1="70" x2="312" y2="67" stroke="#546e7a" stroke-width="1.5"/>
+                                <line x1="320" y1="70" x2="320" y2="67" stroke="#546e7a" stroke-width="1.5"/>
+                                <line x1="328" y1="70" x2="328" y2="67" stroke="#546e7a" stroke-width="1.5"/>
+                                <line x1="312" y1="92" x2="312" y2="95" stroke="#546e7a" stroke-width="1.5"/>
+                                <line x1="320" y1="92" x2="320" y2="95" stroke="#546e7a" stroke-width="1.5"/>
+                                <line x1="328" y1="92" x2="328" y2="95" stroke="#546e7a" stroke-width="1.5"/>
+                                <text x="320" y="120" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">Фильтра-</text>
+                                <text x="320" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">ция</text>
+                            </g>
+
+                            <!-- Stage 4: Clean Water -->
+                            <g class="process-stage stage-4" data-stage="4">
+                                <circle cx="460" cy="81" r="32" fill="#ffffff" stroke="#90a4ae" stroke-width="3" filter="url(#pipe-shadow)"/>
+                                <circle cx="460" cy="81" r="16" stroke="#079bd3" stroke-width="2" fill="none" opacity="0.7"/>
+                                <path d="M460 75 L460 81 L465 84" stroke="#079bd3" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+                                <text x="460" y="120" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">Чистая</text>
+                                <text x="460" y="132" text-anchor="middle" font-size="11" font-weight="600" fill="#102a43">вода</text>
+                            </g>
+
+                            <!-- Technical indicators -->
+                            <g class="tech-indicators">
+                                <text x="270" y="25" text-anchor="middle" font-size="10" fill="#546e7a" opacity="0.6">Производительность: до 500 м³/ч</text>
+                                <text x="270" y="310" text-anchor="middle" font-size="10" fill="#546e7a" opacity="0.6">Степень очистки: 99.9%</text>
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -168,24 +359,33 @@
                 <div class="section-header">
                     <h2>Как мы работаем</h2>
                 </div>
-                <div class="timeline">
-                    <div class="timeline-item">
+                <div class="timeline" id="work-timeline">
+                    <svg class="timeline-connector" viewBox="0 0 1000 4" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="timeline-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#079bd3;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <line class="connector-bg" x1="0" y1="2" x2="1000" y2="2" stroke="#e0e8f0" stroke-width="3" />
+                        <line class="connector-progress" x1="0" y1="2" x2="0" y2="2" stroke="url(#timeline-gradient)" stroke-width="3" />
+                    </svg>
+                    <div class="timeline-item" data-timeline-step="1">
                         <div class="timeline-step">1</div>
                         <h3 class="timeline-title">Анализ воды</h3>
                         <p class="timeline-text">Берем пробы и проводим детальный химический анализ в лаборатории.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-timeline-step="2">
                         <div class="timeline-step">2</div>
                         <h3 class="timeline-title">Проектирование</h3>
                         <p class="timeline-text">Индивидуально подбираем оборудование под ваши показатели и нужды.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-timeline-step="3">
                         <div class="timeline-step">3</div>
-
                         <h3 class="timeline-title">Производство и монтаж</h3>
                         <p class="timeline-text">Изготавливаем и профессионально устанавливаем систему на объекте.</p>
                     </div>
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-timeline-step="4">
                         <div class="timeline-step">4</div>
                         <h3 class="timeline-title">Сервис</h3>
                         <p class="timeline-text">Берем систему на регулярное гарантийное и сервисное обслуживание.</p>
