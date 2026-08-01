@@ -200,9 +200,6 @@ a { color: inherit; }
     display: flex; align-items: center;
     padding-top: 80px; overflow: hidden;
     background: linear-gradient(145deg, #ffffff 0%, #f0f9fe 46%, #e7f5fc 100%);
-    background-image:
-        radial-gradient(ellipse 70% 60% at 80% 42%, rgba(22,93,204,.10) 0%, transparent 64%),
-        radial-gradient(ellipse 55% 80% at 12% 85%, rgba(7,155,211,.10) 0%, transparent 58%);
 }
 .hero::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -210,23 +207,36 @@ a { color: inherit; }
         linear-gradient(90deg, var(--grid-ln) 1px, transparent 1px);
     background-size: 72px 72px;
     mask-image: linear-gradient(to right, transparent, #000 48%, #000);
+    opacity: 0.5;
 }
-.hero-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .34; }
+/* Water waves background */
+.hero-waves {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
+    z-index: 0; pointer-events: none; opacity: 0.7;
+}
+.wave {
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.wave-1 {
+    animation: wave-motion 18s infinite;
+    animation-delay: 0s;
+}
+.wave-2 {
+    animation: wave-motion 22s infinite;
+    animation-delay: -4s;
+}
+@keyframes wave-motion {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-3%) translateY(8px); }
+    50% { transform: translateX(0) translateY(0); }
+    75% { transform: translateX(3%) translateY(-8px); }
+}
+
 .hero-container {
     position: relative; z-index: 2;
-    display: grid; grid-template-columns: minmax(0, 720px) 1fr; gap: 72px;
+    display: grid; grid-template-columns: minmax(0, 680px) 1fr; gap: 80px;
     align-items: center;
-}
-.hero-container::after {
-    content: 'H₂O'; justify-self: end; width: min(32vw, 390px); aspect-ratio: 1;
-    border-radius: 50%; display: grid; place-items: center;
-    color: rgba(22,93,204,.28); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800;
-    letter-spacing: -.08em; border: 1px solid rgba(7,155,211,.28);
-    background:
-        radial-gradient(circle at center, rgba(255,255,255,.88) 0 28%, transparent 29%),
-        repeating-radial-gradient(circle at center, transparent 0 46px, rgba(7,155,211,.13) 47px 48px),
-        linear-gradient(145deg, rgba(255,255,255,.74), rgba(7,155,211,.08));
-    box-shadow: 0 40px 90px rgba(25,105,151,.15), inset 0 0 80px rgba(255,255,255,.8);
 }
 /* Hero content */
 .hero-content { max-width: 680px; }
@@ -260,6 +270,48 @@ a { color: inherit; }
 .hero-meta-sep { width: 1px; height: 36px; background: var(--border);
                   margin: 0 28px; flex-shrink: 0; }
 
+/* Water Process Flow */
+.water-process-flow {
+    display: flex; align-items: center; gap: 0;
+    justify-self: end; max-width: 540px; width: 100%;
+}
+.process-step {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 12px; flex-shrink: 0; opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.process-step.active {
+    opacity: 1; transform: translateY(0);
+}
+.step-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); transition: all 0.4s ease;
+    box-shadow: 0 4px 12px rgba(7,155,211,0.12);
+}
+.process-step.active .step-icon {
+    background: var(--accent); color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(7,155,211,0.32);
+}
+.step-label {
+    font-size: 0.8rem; font-weight: 600; color: var(--tm);
+    text-align: center; max-width: 90px; line-height: 1.3;
+}
+.flow-line {
+    flex: 1; min-width: 40px; height: 4px; margin: 0 -2px;
+    position: relative;
+}
+.flow-line .line-bg {
+    stroke-width: 2; vector-effect: non-scaling-stroke;
+}
+.flow-line .line-progress {
+    stroke-width: 2; vector-effect: non-scaling-stroke;
+    transition: x2 0.8s ease;
+}
+
 /* ── 7. MONITOR WIDGET ───────────────────────────────── */
 /* ── 8. ROUTING CARDS ────────────────────────────────── */
 .routing-section { padding: 0 0 0 0; margin-top: -2px; }
@@ -272,7 +324,7 @@ a { color: inherit; }
     border-radius: var(--r-l); padding: 40px 32px;
     display: flex; flex-direction: column;
     text-decoration: none; color: var(--th);
-    transition: border-color .3s, box-shadow .3s, transform .15s;
+    transition: all 0.3s ease;
     position: relative; overflow: hidden;
     backdrop-filter: blur(8px);
 }
@@ -281,9 +333,11 @@ a { color: inherit; }
     background: linear-gradient(135deg, rgba(0,212,255,.04) 0%, transparent 60%);
     opacity: 0; transition: opacity .3s;
 }
-.routing-card:hover { border-color: var(--border-hov);
-    box-shadow: 0 22px 55px rgba(24,95,137,.16);
-    transform: translateY(-6px); }
+.routing-card:hover {
+    border-color: var(--border-hov);
+    box-shadow: 0 8px 24px rgba(24,95,137,.14);
+    transform: translateY(-4px);
+}
 .routing-card:hover::before { opacity: 1; }
 .routing-icon {
     width: 56px; height: 56px; border-radius: var(--r);
@@ -291,7 +345,7 @@ a { color: inherit; }
     display: flex; align-items: center; justify-content: center;
     font-size: 1.4rem; margin-bottom: 22px; transition: var(--tr);
 }
-.routing-card:hover .routing-icon { background: var(--accent); color: #030b18; }
+.routing-card:hover .routing-icon { background: var(--accent); color: #ffffff; }
 .routing-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
 .routing-card p  { color: var(--tm); font-size: .9rem; line-height: 1.6; flex: 1; margin-bottom: 24px; }
 .routing-arrow   { color: var(--accent); font-size: 1rem; transition: transform .3s; }
@@ -345,24 +399,37 @@ a { color: inherit; }
     display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 24px; position: relative; margin-top: 64px;
 }
-.timeline::before {
-    content: ''; position: absolute; top: 28px;
+.timeline-connector {
+    position: absolute; top: 28px;
     left: calc(12.5% + 4px); right: calc(12.5% + 4px);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
-    z-index: 0;
+    height: 2px; width: calc(100% - 25% - 8px);
+    z-index: 0; pointer-events: none;
 }
-.timeline-item { text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+.timeline-connector .connector-bg {
+    x1: 0; y1: 1; x2: 100%; y2: 1;
+    stroke: var(--border); stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+}
+.timeline-connector .connector-progress {
+    x1: 0; y1: 1; x2: 0; y2: 1;
+    stroke: url(#timeline-gradient); stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    transition: x2 0.6s ease;
+}
+.timeline-item { text-align: center; position: relative; z-index: 1; padding: 0 12px;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease; }
+.timeline-item.active { opacity: 1; transform: translateY(0); }
 .timeline-step {
     width: 56px; height: 56px; border-radius: 50%;
-    background: var(--bg-3); border: 1px solid var(--border-hov);
-    color: var(--accent); display: flex; align-items: center; justify-content: center;
+    background: var(--bg-3); border: 2px solid var(--border);
+    color: var(--ts); display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 1.15rem; margin: 0 auto 24px;
-    transition: var(--tr);
-    box-shadow: 0 0 0 0 var(--accent-glow);
+    transition: all 0.4s ease;
 }
-.timeline-item:hover .timeline-step {
-    background: var(--accent); color: #030b18;
+.timeline-item.active .timeline-step {
+    background: var(--accent); color: #ffffff;
+    border-color: var(--accent);
     box-shadow: 0 0 24px var(--accent-glow);
 }
 .timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
@@ -828,10 +895,10 @@ a { color: inherit; }
 
 @media (max-width: 1024px) {
     .hero-container { grid-template-columns: 1fr; gap: 48px; }
-    .hero-container::after { display: none; }
+    .water-process-flow { max-width: 100%; justify-self: center; }
     .routing-grid, .trust-grid { grid-template-columns: repeat(2, 1fr); }
-    .timeline { grid-template-columns: repeat(2, 1fr); }
-    .timeline::before { display: none; }
+    .timeline { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+    .timeline-connector { display: none; }
     .cta-wrapper { flex-direction: column; text-align: center; gap: 40px; padding: 48px 40px; }
     .cta-form-container { min-width: unset; max-width: 100%; width: 100%; }
     .equipment-grid { grid-template-columns: repeat(2, 1fr); }
@@ -873,8 +940,16 @@ a { color: inherit; }
     .hero-buttons { flex-direction: column; }
     .hero-buttons .btn { width: 100%; justify-content: center; }
     .hero-meta { gap: 0; flex-wrap: wrap; }
+    .water-process-flow {
+        flex-direction: column; gap: 16px; max-width: 280px;
+    }
+    .flow-line { display: none; }
+    .process-step { width: 100%; }
+    .step-label { max-width: 100%; }
     .routing-grid, .trust-grid, .numbers-grid, .timeline,
     .equipment-grid, .grid-2-col, .stats-grid { grid-template-columns: 1fr; }
+    .timeline { gap: 32px; }
+    .timeline-connector { display: none; }
     .number-item { border-right: none; border-bottom: 1px solid var(--border); }
     .number-item:last-child { border-bottom: none; }
     .footer-container { grid-template-columns: 1fr; text-align: center; }
@@ -905,6 +980,8 @@ a { color: inherit; }
                              transition-duration: .01ms !important; }
     .hero-canvas, .custom-cursor { display: none !important; }
     .reveal, .reveal-row > * { opacity: 1 !important; transform: none !important; }
+    .wave { animation: none !important; }
+    .process-step, .timeline-item { opacity: 1 !important; transform: none !important; }
 }
 /* end of styles */
 

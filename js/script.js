@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -262,6 +264,106 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === lightbox) closeLightbox();
         });
     }
+
+    // 12. Water Process Flow Animation
+    if (!prefersReducedMotion) {
+        const processSteps = document.querySelectorAll('.process-step');
+        const flowLines = document.querySelectorAll('.flow-line .line-progress');
+
+        if (processSteps.length > 0) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateWaterProcess();
+                        heroObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            heroObserver.observe(document.querySelector('.hero'));
+
+            function animateWaterProcess() {
+                processSteps.forEach((step, index) => {
+                    setTimeout(() => {
+                        step.classList.add('active');
+                        if (index < flowLines.length) {
+                            setTimeout(() => {
+                                flowLines[index].setAttribute('x2', '100%');
+                            }, 200);
+                        }
+                    }, index * 600);
+                });
+            }
+        }
+    } else {
+        // Show all steps immediately if reduced motion
+        document.querySelectorAll('.process-step').forEach(step => {
+            step.classList.add('active');
+        });
+        document.querySelectorAll('.flow-line .line-progress').forEach(line => {
+            line.setAttribute('x2', '100%');
+        });
+    }
+
+    // 13. Timeline Animation (How It Works)
+    const workTimeline = document.getElementById('work-timeline');
+    if (workTimeline && !prefersReducedMotion) {
+        const timelineItems = workTimeline.querySelectorAll('.timeline-item');
+        const connectorProgress = workTimeline.querySelector('.connector-progress');
+
+        // Add gradient definition for timeline
+        if (connectorProgress && !document.getElementById('timeline-gradient')) {
+            const svg = workTimeline.querySelector('.timeline-connector');
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            gradient.setAttribute('id', 'timeline-gradient');
+            gradient.setAttribute('x1', '0%');
+            gradient.setAttribute('y1', '0%');
+            gradient.setAttribute('x2', '100%');
+            gradient.setAttribute('y2', '0%');
+            gradient.innerHTML = `
+                <stop offset="0%" style="stop-color:#22b8e6" />
+                <stop offset="100%" style="stop-color:#087dbf" />
+            `;
+            defs.appendChild(gradient);
+            svg.insertBefore(defs, svg.firstChild);
+        }
+
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateTimeline();
+                    timelineObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineObserver.observe(workTimeline);
+
+        function animateTimeline() {
+            const totalSteps = timelineItems.length;
+            const progressPerStep = 100 / (totalSteps - 1);
+
+            timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('active');
+                    if (connectorProgress && index > 0) {
+                        const progressPercent = Math.min(index * progressPerStep, 100);
+                        connectorProgress.setAttribute('x2', `${progressPercent}%`);
+                    }
+                }, index * 400);
+            });
+        }
+    } else if (workTimeline) {
+        // Show all timeline items immediately if reduced motion
+        workTimeline.querySelectorAll('.timeline-item').forEach(item => {
+            item.classList.add('active');
+        });
+        const connectorProgress = workTimeline.querySelector('.connector-progress');
+        if (connectorProgress) {
+            connectorProgress.setAttribute('x2', '100%');
+        }
+    }
 });
 
 /* === EXTRA: Particles, cursor, hero text, counters, tilt === */
@@ -272,176 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!hero) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // 1) PARTICLES CANVAS
-    const canvas = document.createElement('canvas');
-    canvas.className = 'hero-canvas particle-layer';
-    hero.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    let DPR = Math.max(1, window.devicePixelRatio || 1);
+    // Simplified version - removed heavy particle canvas and 3D tilt
+    // Keep only essential animations
 
-    function resizeCanvas(){
-        canvas.width = Math.floor(hero.offsetWidth * DPR);
-        canvas.height = Math.floor(hero.offsetHeight * DPR);
-        canvas.style.width = hero.offsetWidth + 'px';
-        canvas.style.height = hero.offsetHeight + 'px';
-        ctx.setTransform(DPR,0,0,DPR,0,0);
-    }
-    window.addEventListener('resize', resizeCanvas, {passive:true});
-    resizeCanvas();
-
-    // particles (subtle, parallax-follow, always visible above content)
-    const particles = [];
-    const PARTICLE_COUNT = Math.max(25, Math.floor((hero.offsetWidth/60)));
-
-    // track pointer for parallax (optimized: no layout thrashing)
-    let pointer = { x: hero.offsetWidth/2, y: hero.offsetHeight/2 };
-    hero.addEventListener('pointermove', (e)=>{
-        // Use page coordinates minus hero offset instead of getBoundingClientRect
-        pointer.x = e.pageX - hero.offsetLeft;
-        pointer.y = e.pageY - hero.offsetTop;
-    }, {passive:true});
-
-    function initParticles(){
-        particles.length = 0;
-        const w = canvas.width / DPR; const h = canvas.height / DPR;
-        for(let i=0;i<PARTICLE_COUNT;i++){
-            particles.push({
-                x: Math.random()*w,
-                y: Math.random()*h,
-                baseX: Math.random()*w,
-                baseY: Math.random()*h,
-                r: 30 + Math.random()*80,           // larger radius (blobs)
-                a: 0.15 + Math.random()*0.3,        // more alpha
-                vx: (Math.random()-0.5)*0.8,        // proper velocity
-                vy: (Math.random()-0.5)*0.8,
-                hue: 186 + Math.random()*28,
-                parallax: 0.02 + Math.random()*0.12 // how strongly follows pointer
-            });
-        }
-    }
-    initParticles();
-
-    let last = performance.now();
-    let parallaxOffset = { x:0, y:0 };
-    function tick(t){
-        const dt = Math.min(40, t-last)/1000;
-        last = t;
-        ctx.clearRect(0,0,canvas.width/DPR,canvas.height/DPR);
-
-        // smooth parallax target toward pointer center
-        const cx = hero.offsetWidth/2; const cy = hero.offsetHeight/2;
-        const targetOffsetX = (pointer.x - cx) * 0.08; // sensitivity
-        const targetOffsetY = (pointer.y - cy) * 0.06;
-        parallaxOffset.x += (targetOffsetX - parallaxOffset.x) * 0.12;
-        parallaxOffset.y += (targetOffsetY - parallaxOffset.y) * 0.12;
-
-        const W = canvas.width/DPR; const H = canvas.height/DPR;
-
-        for(const p of particles){
-            // true movement physics
-            p.baseX += p.vx;
-            p.baseY += p.vy;
-
-            // wrap gently using safe bounds for large blobs
-            const limit = p.r * 2.5;
-            if (p.baseX < -limit) { p.baseX += (W + limit*2); p.x += (W + limit*2); }
-            else if (p.baseX > W + limit) { p.baseX -= (W + limit*2); p.x -= (W + limit*2); }
-            
-            if (p.baseY < -limit) { p.baseY += (H + limit*2); p.y += (H + limit*2); }
-            else if (p.baseY > H + limit) { p.baseY -= (H + limit*2); p.y -= (H + limit*2); }
-
-            // calculate draw position (base + parallax)
-            p.x += ( (p.baseX + parallaxOffset.x * p.parallax) - p.x ) * 0.15;
-            p.y += ( (p.baseY + parallaxOffset.y * p.parallax) - p.y ) * 0.15;
-
-            // subtle gradient without dirty grey halos
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*2.2);
-            const baseColor = `hsla(${p.hue}, 65%, 60%, ${p.a})`;
-            g.addColorStop(0, baseColor);
-            g.addColorStop(0.35, `hsla(${p.hue}, 60%, 50%, ${p.a*0.45})`);
-            g.addColorStop(1, `hsla(${p.hue}, 60%, 50%, 0)`); // clean fade
-
-            ctx.fillStyle = g;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-            ctx.fill();
-        }
-        requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    // 2) CUSTOM CURSOR
-    const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
-    document.body.appendChild(cursor);
-    let mouseX=0, mouseY=0, cx=0, cy=0;
-    document.addEventListener('mousemove', (e)=>{ mouseX=e.clientX; mouseY=e.clientY; cursor.style.left = (e.clientX)+'px'; cursor.style.top = (e.clientY)+'px'; });
-    // enlarge on interactive elements
-    ['a','button','.btn','.project-item','.routing-card','.nav-link'].forEach(sel=>{
-        document.querySelectorAll(sel).forEach(el=>{
-            el.addEventListener('mouseenter', ()=>{ cursor.classList.add('big'); });
-            el.addEventListener('mouseleave', ()=>{ cursor.classList.remove('big'); });
-        });
-    });
-
-    // 3) HERO TITLE SPLIT & STAGGER
-    const title = document.querySelector('.hero-title');
-    if (title){
-        const text = title.textContent.trim();
-        title.textContent = '';
-        const words = text.split(' ');
-        let charIndex = 0;
-        const frag = document.createDocumentFragment();
-        
-        words.forEach((word, wordIndex) => {
-            const wordWrapper = document.createElement('span');
-            wordWrapper.className = 'word-wrapper';
-            wordWrapper.style.display = 'inline-flex';
-            wordWrapper.style.whiteSpace = 'nowrap';
-            wordWrapper.style.marginRight = '0.3em'; // replace space character with margin
-            
-            for(let i=0; i<word.length; i++){
-                const wrapper = document.createElement('span');
-                wrapper.className = 'char-wrapper';
-                
-                const ch = document.createElement('span');
-                ch.className = 'char';
-                ch.textContent = word[i];
-                ch.style.transitionDelay = (charIndex * 28) + 'ms';
-                
-                wrapper.appendChild(ch);
-                wordWrapper.appendChild(wrapper);
-                charIndex++;
-            }
-            frag.appendChild(wordWrapper);
-        });
-        title.appendChild(frag);
-        // start animation when hero visible
-        const obs = new IntersectionObserver((entries, o)=>{
-            entries.forEach(e=>{ if (e.isIntersecting){ title.classList.add('animate'); o.disconnect(); } });
-        },{threshold:0.2});
-        obs.observe(title);
-    }
-
-    // 4) TILT EFFECT FOR .routing-card
-    document.querySelectorAll('.routing-card').forEach(card => {
-        card.addEventListener('mousemove', (ev)=>{
-            const rect = card.getBoundingClientRect();
-            const px = (ev.clientX - rect.left) / rect.width;
-            const py = (ev.clientY - rect.top) / rect.height;
-            const rotY = (px - 0.5) * 12; // deg
-            const rotX = (0.5 - py) * -12;
-            card.style.transform = `perspective(1200px) translateY(-12px) rotateY(${rotY}deg) rotateX(${rotX}deg) scale3d(1.05, 1.05, 1.05)`;
-            card.style.boxShadow = `0 30px 60px rgba(2,6,23,0.15)`;
-            card.style.transition = `transform 0.1s ease-out, box-shadow 0.1s ease-out`;
-        });
-        card.addEventListener('mouseleave', ()=>{ 
-            card.style.transform = ''; 
-            card.style.transition = `all 0.3s ease`;
-        });
-    });
-
-    // 5) COUNTERS
+    // 1) COUNTERS
     const counters = document.querySelectorAll('.number-value');
     if (counters.length){
         const counterObs = new IntersectionObserver((entries, o)=>{
@@ -475,17 +411,6 @@ document.addEventListener('DOMContentLoaded', () => {
         counters.forEach(c=> counterObs.observe(c));
     }
     function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
-
-    // 6) make sure canvas resizes with hero changes
-    new ResizeObserver(() => {
-        resizeCanvas();
-        // re-init count if needed
-        // resize re-init disabled for smooth transition
-    }).observe(hero);
-
-    // 7) keyboard accessibility: hide custom cursor on keyboard navigation
-    window.addEventListener('keydown', (e)=>{ if (e.key === 'Tab') cursor.style.display = 'none'; });
-    window.addEventListener('mousedown', ()=> cursor.style.display = 'block');
 
 })();
 
