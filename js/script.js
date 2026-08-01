@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     // 1. Mobile burger menu toggle
     const burgerBtn = document.getElementById('burger-btn');
     const navMenu = document.getElementById('nav-menu');
@@ -265,43 +263,84 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 12. Water Process Flow Animation
-    if (!prefersReducedMotion) {
-        const processSteps = document.querySelectorAll('.process-step');
-        const flowLines = document.querySelectorAll('.flow-line .line-progress');
+    // 12. Engineering Flow Animation
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (processSteps.length > 0) {
+    if (!prefersReducedMotion) {
+        // Animate stage markers
+        const stageMarkers = document.querySelectorAll('.stage-marker');
+
+        if (stageMarkers.length > 0) {
             const heroObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        animateWaterProcess();
+                        animateStages();
                         heroObserver.disconnect();
                     }
                 });
             }, { threshold: 0.3 });
 
-            heroObserver.observe(document.querySelector('.hero'));
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                heroObserver.observe(heroSection);
+            }
 
-            function animateWaterProcess() {
-                processSteps.forEach((step, index) => {
+            function animateStages() {
+                stageMarkers.forEach((marker, index) => {
                     setTimeout(() => {
-                        step.classList.add('active');
-                        if (index < flowLines.length) {
-                            setTimeout(() => {
-                                flowLines[index].setAttribute('x2', '100%');
-                            }, 200);
-                        }
-                    }, index * 600);
+                        marker.classList.add('active');
+                    }, index * 500);
                 });
             }
         }
+
+        // Create flow particles
+        const particlesContainer = document.querySelector('.flow-particles');
+        const flowPaths = document.querySelectorAll('.flow-path');
+
+        if (particlesContainer && flowPaths.length > 0) {
+            const particles = [];
+            const particleCount = 6;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                particle.setAttribute('class', 'flow-particle');
+                particle.setAttribute('r', '3');
+                particle.setAttribute('cx', '0');
+                particle.setAttribute('cy', '0');
+                particlesContainer.appendChild(particle);
+
+                particles.push({
+                    element: particle,
+                    pathIndex: i % flowPaths.length,
+                    progress: (i / particleCount) * 100
+                });
+            }
+
+            function animateParticles() {
+                particles.forEach(particle => {
+                    const path = flowPaths[particle.pathIndex];
+                    const pathLength = path.getTotalLength();
+                    const point = path.getPointAtLength((particle.progress / 100) * pathLength);
+
+                    particle.element.setAttribute('cx', point.x);
+                    particle.element.setAttribute('cy', point.y);
+
+                    particle.progress += 0.15;
+                    if (particle.progress > 100) {
+                        particle.progress = 0;
+                    }
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            setTimeout(() => animateParticles(), 1000);
+        }
     } else {
-        // Show all steps immediately if reduced motion
-        document.querySelectorAll('.process-step').forEach(step => {
-            step.classList.add('active');
-        });
-        document.querySelectorAll('.flow-line .line-progress').forEach(line => {
-            line.setAttribute('x2', '100%');
+        // Show all stages immediately if reduced motion
+        document.querySelectorAll('.stage-marker').forEach(marker => {
+            marker.classList.add('active');
         });
     }
 

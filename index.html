@@ -62,20 +62,56 @@
 
     <main>
         <section class="hero">
-            <!-- Water waves background -->
-            <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
+            <!-- Engineering water flow visualization -->
+            <svg class="engineering-flow-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
                 <defs>
-                    <linearGradient id="wave-gradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:rgba(7,155,211,0.08);stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:rgba(22,93,204,0.12);stop-opacity:1" />
+                    <linearGradient id="flow-gradient-main" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#079bd3;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:0.6" />
                     </linearGradient>
-                    <linearGradient id="wave-gradient-2" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:rgba(7,155,211,0.06);stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:rgba(22,93,204,0.09);stop-opacity:1" />
+                    <linearGradient id="flow-gradient-light" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#079bd3;stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:0.3" />
                     </linearGradient>
                 </defs>
-                <path class="wave wave-1" fill="url(#wave-gradient-1)" d="M0,200 Q300,150 600,200 T1200,200 L1200,600 L0,600 Z" />
-                <path class="wave wave-2" fill="url(#wave-gradient-2)" d="M0,250 Q300,220 600,250 T1200,250 L1200,600 L0,600 Z" />
+
+                <!-- Engineering grid -->
+                <g class="engineering-grid-lines" opacity="0.15">
+                    <line x1="0" y1="200" x2="1200" y2="200" stroke="#079bd3" stroke-width="0.5"/>
+                    <line x1="0" y1="400" x2="1200" y2="400" stroke="#079bd3" stroke-width="0.5"/>
+                    <line x1="0" y1="600" x2="1200" y2="600" stroke="#079bd3" stroke-width="0.5"/>
+                    <line x1="300" y1="0" x2="300" y2="800" stroke="#079bd3" stroke-width="0.5"/>
+                    <line x1="600" y1="0" x2="600" y2="800" stroke="#079bd3" stroke-width="0.5"/>
+                    <line x1="900" y1="0" x2="900" y2="800" stroke="#079bd3" stroke-width="0.5"/>
+                </g>
+
+                <!-- Technical nodes -->
+                <g class="tech-nodes" opacity="0.2">
+                    <circle cx="200" cy="250" r="4" fill="#079bd3"/>
+                    <circle cx="200" cy="250" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+
+                    <circle cx="450" cy="320" r="4" fill="#079bd3"/>
+                    <circle cx="450" cy="320" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+
+                    <circle cx="700" cy="280" r="4" fill="#079bd3"/>
+                    <circle cx="700" cy="280" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+
+                    <circle cx="950" cy="350" r="4" fill="#079bd3"/>
+                    <circle cx="950" cy="350" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+                </g>
+
+                <!-- Flow paths -->
+                <g class="flow-paths">
+                    <path class="flow-path flow-path-1" d="M 50,250 Q 150,230 200,250 T 450,320 T 700,280 T 950,350 L 1150,350"
+                          stroke="url(#flow-gradient-light)" stroke-width="2" fill="none" opacity="0.5"/>
+                    <path class="flow-path flow-path-2" d="M 50,300 Q 150,320 200,300 T 450,370 T 700,330 T 950,400 L 1150,400"
+                          stroke="url(#flow-gradient-light)" stroke-width="2" fill="none" opacity="0.4"/>
+                    <path class="flow-path flow-path-3" d="M 50,350 Q 150,370 200,350 T 450,420 T 700,380 T 950,450 L 1150,450"
+                          stroke="url(#flow-gradient-light)" stroke-width="1.5" fill="none" opacity="0.3"/>
+                </g>
+
+                <!-- Flow particles (will be animated via JS) -->
+                <g class="flow-particles"></g>
             </svg>
 
             <div class="container hero-container">
@@ -84,8 +120,7 @@
                         <span class="badge-dot"></span>
                         Производство · Краснодар · с 2014 года
                     </span>
-                    <h1 class="hero-title">Электролизные системы</h1>
-                    <div class="hero-line2 grad">водоочистки</div>
+                    <h1 class="hero-title">Электролизные системы водоочистки</h1>
                     <p class="hero-subtitle">Проектирование, производство и монтаж промышленных установок для водоканалов, предприятий и муниципалитетов.</p>
                     <div class="hero-buttons">
                         <a href="contact.html" class="btn btn-primary">Рассчитать проект</a>
@@ -109,68 +144,23 @@
                     </div>
                 </div>
 
-                <!-- Water Treatment Process Flow -->
-                <div class="water-process-flow">
-                    <div class="process-step" data-step="1">
-                        <div class="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 8C20 8 12 16 12 22C12 26.4183 15.5817 30 20 30C24.4183 30 28 26.4183 28 22C28 16 20 8 20 8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="step-label">Исходная вода</div>
+                <!-- Process stages visualization -->
+                <div class="process-stages">
+                    <div class="stage-marker stage-1" data-stage="1">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">Исходная<br>вода</div>
                     </div>
-
-                    <svg class="flow-line" width="100%" height="4" preserveAspectRatio="none">
-                        <line class="line-bg" x1="0" y1="2" x2="100%" y2="2" stroke="#E7E1D7" stroke-width="2"/>
-                        <line class="line-progress" x1="0" y1="2" x2="0" y2="2" stroke="url(#flow-gradient)" stroke-width="2"/>
-                        <defs>
-                            <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#22b8e6" />
-                                <stop offset="100%" style="stop-color:#087dbf" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-
-                    <div class="process-step" data-step="2">
-                        <div class="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 10L24 18H16L20 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20 22L16 30H24L20 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="20" cy="20" r="2" fill="currentColor"/>
-                            </svg>
-                        </div>
-                        <div class="step-label">Электролиз</div>
+                    <div class="stage-marker stage-2" data-stage="2">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">Обработка</div>
                     </div>
-
-                    <svg class="flow-line" width="100%" height="4" preserveAspectRatio="none">
-                        <line class="line-bg" x1="0" y1="2" x2="100%" y2="2" stroke="#E7E1D7" stroke-width="2"/>
-                        <line class="line-progress" x1="0" y1="2" x2="0" y2="2" stroke="url(#flow-gradient)" stroke-width="2"/>
-                    </svg>
-
-                    <div class="process-step" data-step="3">
-                        <div class="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10" y="12" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-                                <path d="M14 12V10M20 12V10M26 12V10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M14 28V30M20 28V30M26 28V30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="step-label">Фильтрация</div>
+                    <div class="stage-marker stage-3" data-stage="3">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">Фильтрация</div>
                     </div>
-
-                    <svg class="flow-line" width="100%" height="4" preserveAspectRatio="none">
-                        <line class="line-bg" x1="0" y1="2" x2="100%" y2="2" stroke="#E7E1D7" stroke-width="2"/>
-                        <line class="line-progress" x1="0" y1="2" x2="0" y2="2" stroke="url(#flow-gradient)" stroke-width="2"/>
-                    </svg>
-
-                    <div class="process-step" data-step="4">
-                        <div class="step-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="2"/>
-                                <path d="M20 14V20L24 22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <div class="step-label">Чистая вода</div>
+                    <div class="stage-marker stage-4" data-stage="4">
+                        <div class="stage-dot"></div>
+                        <div class="stage-label">Чистая<br>вода</div>
                     </div>
                 </div>
             </div>

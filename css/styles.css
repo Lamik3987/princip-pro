@@ -196,71 +196,50 @@ a { color: inherit; }
 
 /* ── 6. HERO ─────────────────────────────────────────── */
 .hero {
-    position: relative; min-height: 100vh;
+    position: relative; min-height: 680px;
     display: flex; align-items: center;
     padding-top: 80px; overflow: hidden;
     background: linear-gradient(145deg, #ffffff 0%, #f0f9fe 46%, #e7f5fc 100%);
 }
-.hero::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background-image: linear-gradient(var(--grid-ln) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-ln) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: linear-gradient(to right, transparent, #000 48%, #000);
-    opacity: 0.5;
-}
-/* Water waves background */
-.hero-waves {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
-    z-index: 0; pointer-events: none; opacity: 0.7;
-}
-.wave {
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}
-.wave-1 {
-    animation: wave-motion 18s infinite;
-    animation-delay: 0s;
-}
-.wave-2 {
-    animation: wave-motion 22s infinite;
-    animation-delay: -4s;
-}
-@keyframes wave-motion {
-    0%, 100% { transform: translateX(0) translateY(0); }
-    25% { transform: translateX(-3%) translateY(8px); }
-    50% { transform: translateX(0) translateY(0); }
-    75% { transform: translateX(3%) translateY(-8px); }
+
+/* Engineering flow background */
+.engineering-flow-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
 }
 
 .hero-container {
     position: relative; z-index: 2;
-    display: grid; grid-template-columns: minmax(0, 680px) 1fr; gap: 80px;
+    display: grid; grid-template-columns: minmax(0, 600px) 1fr; gap: 100px;
     align-items: center;
 }
+
 /* Hero content */
-.hero-content { max-width: 680px; }
+.hero-content { max-width: 600px; }
 .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 6px 16px; border-radius: 100px;
-    background: rgba(0,212,255,.1); border: 1px solid rgba(0,212,255,.3);
+    background: rgba(7,155,211,.08); border: 1px solid rgba(7,155,211,.2);
     font-size: .78rem; font-weight: 600; color: var(--accent);
     letter-spacing: .5px; text-transform: uppercase; margin-bottom: 28px;
+    backdrop-filter: blur(8px);
 }
-.badge-dot { width: 7px; height: 7px; border-radius: 50%;
-             background: var(--accent); box-shadow: 0 0 8px var(--accent);
-             animation: pulse-dot 2.2s ease-in-out infinite; flex-shrink: 0; }
+.badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 2.2s ease-in-out infinite; flex-shrink: 0;
+}
 .hero-title {
     font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-    font-weight: 900; line-height: 1.06; letter-spacing: -.8px;
-    margin-bottom: 22px; color: var(--th);
-    display: flex; flex-wrap: wrap;
+    font-weight: 900; line-height: 1.1; letter-spacing: -.8px;
+    margin-bottom: 24px; color: var(--th);
 }
 .hero-subtitle {
     font-size: 1.1rem; color: var(--tm); margin-bottom: 40px;
     max-width: 560px; line-height: 1.7;
 }
 .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 52px; }
+
 /* Hero meta bar */
 .hero-meta { display: flex; align-items: center; gap: 0; }
 .hero-meta-item { display: flex; flex-direction: column; }
@@ -270,47 +249,68 @@ a { color: inherit; }
 .hero-meta-sep { width: 1px; height: 36px; background: var(--border);
                   margin: 0 28px; flex-shrink: 0; }
 
-/* Water Process Flow */
-.water-process-flow {
-    display: flex; align-items: center; gap: 0;
-    justify-self: end; max-width: 540px; width: 100%;
+/* Process stages visualization */
+.process-stages {
+    position: relative;
+    display: flex; flex-direction: column;
+    gap: 48px;
+    justify-self: end;
+    padding: 40px 0;
 }
-.process-step {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 12px; flex-shrink: 0; opacity: 0;
-    transform: translateY(20px);
+.stage-marker {
+    display: flex; align-items: center; gap: 16px;
+    opacity: 0;
+    transform: translateX(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.process-step.active {
-    opacity: 1; transform: translateY(0);
+.stage-marker.active {
+    opacity: 1;
+    transform: translateX(0);
 }
-.step-icon {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: rgba(255,255,255,0.9); border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--accent); transition: all 0.4s ease;
-    box-shadow: 0 4px 12px rgba(7,155,211,0.12);
-}
-.process-step.active .step-icon {
-    background: var(--accent); color: #ffffff;
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(7,155,211,0.32);
-}
-.step-label {
-    font-size: 0.8rem; font-weight: 600; color: var(--tm);
-    text-align: center; max-width: 90px; line-height: 1.3;
-}
-.flow-line {
-    flex: 1; min-width: 40px; height: 4px; margin: 0 -2px;
+.stage-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(7,155,211,0.3);
+    border: 2px solid var(--accent);
     position: relative;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
 }
-.flow-line .line-bg {
-    stroke-width: 2; vector-effect: non-scaling-stroke;
+.stage-marker.active .stage-dot {
+    background: var(--accent);
+    box-shadow: 0 0 20px rgba(7,155,211,0.5);
 }
-.flow-line .line-progress {
-    stroke-width: 2; vector-effect: non-scaling-stroke;
-    transition: x2 0.8s ease;
+.stage-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
+.stage-marker.active .stage-dot::before {
+    opacity: 0.3;
+}
+.stage-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--tm);
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.stage-marker.active .stage-label {
+    color: var(--th);
+}
+
+/* Flow particles */
+.flow-particle {
+    fill: var(--accent);
+    opacity: 0.7;
+}
+
 
 /* ── 7. MONITOR WIDGET ───────────────────────────────── */
 /* ── 8. ROUTING CARDS ────────────────────────────────── */
@@ -895,7 +895,7 @@ a { color: inherit; }
 
 @media (max-width: 1024px) {
     .hero-container { grid-template-columns: 1fr; gap: 48px; }
-    .water-process-flow { max-width: 100%; justify-self: center; }
+    .process-stages { justify-self: center; }
     .routing-grid, .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .timeline { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
     .timeline-connector { display: none; }
@@ -935,17 +935,25 @@ a { color: inherit; }
     }
     .dropdown.active { display: block; }
     .has-dropdown:hover .dropdown { transform: none; }
+    .hero { min-height: auto; padding-bottom: 60px; }
     .hero-title { font-size: 2.3rem !important; }
     .hero-container { padding-top: 20px; }
     .hero-buttons { flex-direction: column; }
     .hero-buttons .btn { width: 100%; justify-content: center; }
     .hero-meta { gap: 0; flex-wrap: wrap; }
-    .water-process-flow {
-        flex-direction: column; gap: 16px; max-width: 280px;
+    .process-stages {
+        flex-direction: column;
+        gap: 32px;
+        padding: 20px 0;
+        align-items: flex-start;
+        width: 100%;
     }
-    .flow-line { display: none; }
-    .process-step { width: 100%; }
-    .step-label { max-width: 100%; }
+    .stage-marker {
+        flex-direction: row;
+    }
+    .stage-label {
+        white-space: normal;
+    }
     .routing-grid, .trust-grid, .numbers-grid, .timeline,
     .equipment-grid, .grid-2-col, .stats-grid { grid-template-columns: 1fr; }
     .timeline { gap: 32px; }
@@ -964,13 +972,15 @@ a { color: inherit; }
     .max-widget { bottom: 18px; left: 18px; width: 50px; height: 50px; }
     .floating-chat { bottom: 18px; right: 18px; width: 52px; height: 52px; }
 }
-.hero-title   { margin-bottom: 4px; }
-.hero-line2 {
-    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-    font-weight: 900; line-height: 1.06; letter-spacing: -.8px;
-    margin-bottom: 24px; display: block;
-    animation: fade-in-up .9s ease .5s both;
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .badge-dot { animation: none; }
+    .stage-marker { opacity: 1; transform: translateX(0); }
+    .flow-particle { display: none; }
+    .hero-content * { animation: none !important; }
 }
+
 @media (pointer: coarse) {
     .custom-cursor { display: none !important; }
 }
