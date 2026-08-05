@@ -1,464 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Принцип-Про - Автоматизированные системы водоочистки</title>
-    <meta name="description" content="Проектирование, производство и обслуживание оборудования водоочистки для промышленных предприятий и муниципалитетов.">
-    <meta property="og:title" content="Принцип-Про - Автоматизированные системы водоочистки">
-    <meta property="og:description" content="Проектирование, производство и обслуживание оборудования водоочистки для промышленных предприятий и муниципалитетов.">
-    <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css?v=5">
+    <meta name="description" content="Принцип‑Про — проектирование и производство систем водоподготовки, электролизных установок и АСУ ТП.">
+    <meta name="theme-color" content="#06141d">
+    <title>Принцип‑Про — инженерия воды</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container header-container">
-            <a href="index.html" class="logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип-Про"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
-            <nav class="nav" id="nav-menu">
-                <ul class="nav-list">
-                    <li class="nav-item has-dropdown">
-                        <a href="services.html" class="nav-link">Услуги <i class="fa-solid fa-chevron-down"></i></a>
-                        <div class="dropdown">
-                            <a href="services.html#design" class="dropdown-link"><i class="fa-solid fa-compass-drafting"></i> Проектирование</a>
-                            <a href="services.html#montazh" class="dropdown-link"><i class="fa-solid fa-helmet-safety"></i> Монтаж</a>
-                            <a href="services.html#audit" class="dropdown-link"><i class="fa-solid fa-magnifying-glass-chart"></i> Технический аудит</a>
-                            <a href="services.html#modernization" class="dropdown-link"><i class="fa-solid fa-arrows-rotate"></i> Модернизация</a>
-                            <a href="services.html#pnr" class="dropdown-link"><i class="fa-solid fa-play"></i> Пуско-наладка</a>
-                            <a href="services.html#repair" class="dropdown-link"><i class="fa-solid fa-wrench"></i> Ремонт и сервис</a>
-                        </div>
-                    </li>
-                    <li class="nav-item has-dropdown">
-                        <a href="equipment.html" class="nav-link">Оборудование <i class="fa-solid fa-chevron-down"></i></a>
-                        <div class="dropdown">
-                            <a href="equipment.html#water-prep" class="dropdown-link"><i class="fa-solid fa-filter"></i> Водоподготовка</a>
-                            <a href="equipment.html#electrolysis" class="dropdown-link"><i class="fa-solid fa-bolt"></i> Электролизные установки</a>
-                            <a href="equipment.html#uv" class="dropdown-link"><i class="fa-solid fa-sun"></i> УФ-обеззараживание</a>
-                            <a href="equipment.html#automation" class="dropdown-link"><i class="fa-solid fa-microchip"></i> АСУ ТП и автоматика</a>
-                            <a href="equipment.html#reagents" class="dropdown-link"><i class="fa-solid fa-flask"></i> Реагенты</a>
-                            <a href="equipment.html#parts" class="dropdown-link"><i class="fa-solid fa-gears"></i> Комплектующие</a>
-                        </div>
-                    </li>
-                    <li class="nav-item has-dropdown">
-                        <a href="about.html" class="nav-link">О компании <i class="fa-solid fa-chevron-down"></i></a>
-                        <div class="dropdown">
-                            <a href="about.html" class="dropdown-link"><i class="fa-solid fa-building"></i> О нас</a>
-                            <a href="portfolio.html" class="dropdown-link"><i class="fa-solid fa-images"></i> Наши объекты</a>
-                            <a href="docs.html" class="dropdown-link"><i class="fa-solid fa-file-certificate"></i> Документация</a>
-                            <a href="reviews.html" class="dropdown-link"><i class="fa-solid fa-star"></i> Отзывы</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Контакты</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <a href="tel:+78005507514" class="phone-link">8 (800) 550-75-14</a>
-                <a href="contact.html" class="btn btn-outline header-btn">Заказать звонок</a>
-                <button class="burger" id="burger-btn" type="button" aria-label="Открыть меню" aria-controls="nav-menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-            </div>
-        </div>
+    <canvas id="water-canvas" aria-hidden="true"></canvas>
+    <div class="ambient-light ambient-light--one" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light--two" aria-hidden="true"></div>
+
+    <header class="site-header" data-header>
+        <a class="brand" href="index.html" aria-label="Принцип‑Про — главная">
+            <span class="brand-mark" aria-hidden="true">ПП</span>
+            <span class="brand-name">ПРИНЦИП‑ПРО</span>
+        </a>
+
+        <button class="menu-button" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-navigation">
+            <span></span><span></span>
+        </button>
+
+        <nav class="site-nav" id="main-navigation" aria-label="Основная навигация">
+            <a href="#directions">Направления</a>
+            <a href="services.html">Услуги</a>
+            <a href="portfolio.html">Проекты</a>
+            <a href="about.html">Компания</a>
+        </nav>
+
+        <a class="header-contact" href="contact.html">
+            <span>Обсудить проект</span>
+            <span aria-hidden="true">↗</span>
+        </a>
     </header>
 
     <main>
-        <section class="hero">
-            <!-- Engineering water flow visualization -->
-            <svg class="engineering-flow-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-                <defs>
-                    <linearGradient id="flow-gradient-main" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#079bd3;stop-opacity:0.6" />
-                        <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:0.6" />
-                    </linearGradient>
-                    <linearGradient id="flow-gradient-light" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#079bd3;stop-opacity:0.3" />
-                        <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:0.3" />
-                    </linearGradient>
-                </defs>
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow"><span></span> Инженерия воды · с 2014 года</p>
+                <h1 id="hero-title">ПРИНЦИП<br>ПРО</h1>
+                <p class="hero-subtitle">Проектируем, производим и автоматизируем системы, которые управляют водой.</p>
+                <a class="hero-cta" href="contact.html">
+                    <span>Обсудить задачу</span>
+                    <span aria-hidden="true">↗</span>
+                </a>
+            </div>
 
-                <!-- Engineering grid -->
-                <g class="engineering-grid-lines" opacity="0.15">
-                    <line x1="0" y1="200" x2="1200" y2="200" stroke="#079bd3" stroke-width="0.5"/>
-                    <line x1="0" y1="400" x2="1200" y2="400" stroke="#079bd3" stroke-width="0.5"/>
-                    <line x1="0" y1="600" x2="1200" y2="600" stroke="#079bd3" stroke-width="0.5"/>
-                    <line x1="300" y1="0" x2="300" y2="800" stroke="#079bd3" stroke-width="0.5"/>
-                    <line x1="600" y1="0" x2="600" y2="800" stroke="#079bd3" stroke-width="0.5"/>
-                    <line x1="900" y1="0" x2="900" y2="800" stroke="#079bd3" stroke-width="0.5"/>
-                </g>
+            <div class="hero-meta" aria-label="Ключевые направления">
+                <span>Проектирование</span>
+                <span>Производство</span>
+                <span>АСУ ТП</span>
+            </div>
 
-                <!-- Technical nodes -->
-                <g class="tech-nodes" opacity="0.2">
-                    <circle cx="200" cy="250" r="4" fill="#079bd3"/>
-                    <circle cx="200" cy="250" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+            <a class="scroll-cue" href="#directions" aria-label="Перейти к направлениям">
+                <span class="scroll-line"></span>
+                <span>Исследовать</span>
+            </a>
+        </section>
 
-                    <circle cx="450" cy="320" r="4" fill="#079bd3"/>
-                    <circle cx="450" cy="320" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+        <section class="flow-statement" aria-label="Подход компании">
+            <p class="section-kicker">Единый технологический поток</p>
+            <h2>От анализа среды<br>до точного управления.</h2>
+            <p>Соединяем механику, химию и программное управление в надёжные промышленные системы.</p>
+        </section>
 
-                    <circle cx="700" cy="280" r="4" fill="#079bd3"/>
-                    <circle cx="700" cy="280" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
+        <section class="directions" id="directions" aria-labelledby="directions-title">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">Оборудование и услуги</p>
+                    <h2 id="directions-title">Три направления.<br>Один принцип.</h2>
+                </div>
+                <p>Каждое решение рассчитывается под исходную воду, производительность и инфраструктуру объекта.</p>
+            </div>
 
-                    <circle cx="950" cy="350" r="4" fill="#079bd3"/>
-                    <circle cx="950" cy="350" r="20" fill="none" stroke="#079bd3" stroke-width="1"/>
-                </g>
-
-                <!-- Flow paths -->
-                <g class="flow-paths">
-                    <path class="flow-path flow-path-1" d="M 50,250 Q 150,230 200,250 T 450,320 T 700,280 T 950,350 L 1150,350"
-                          stroke="url(#flow-gradient-light)" stroke-width="2" fill="none" opacity="0.5"/>
-                    <path class="flow-path flow-path-2" d="M 50,300 Q 150,320 200,300 T 450,370 T 700,330 T 950,400 L 1150,400"
-                          stroke="url(#flow-gradient-light)" stroke-width="2" fill="none" opacity="0.4"/>
-                    <path class="flow-path flow-path-3" d="M 50,350 Q 150,370 200,350 T 450,420 T 700,380 T 950,450 L 1150,450"
-                          stroke="url(#flow-gradient-light)" stroke-width="1.5" fill="none" opacity="0.3"/>
-                </g>
-
-                <!-- Flow particles (will be animated via JS) -->
-                <g class="flow-particles"></g>
-            </svg>
-
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="hero-badge">
-                        <span class="badge-dot"></span>
-                        Производство · Краснодар · с 2014 года
+            <div class="direction-grid">
+                <button class="direction-card" type="button" data-solution="electrolysis" aria-haspopup="dialog">
+                    <span class="card-number">01</span>
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48"><path d="M15 8h18M18 8v8l-8 20c-.8 2 1 4 3 4h22c2 0 3.8-2 3-4l-8-20V8M14 30h20M19 25h.01M27 34h.01"/></svg>
                     </span>
-                    <h1 class="hero-title">Электролизные системы водоочистки</h1>
-                    <p class="hero-subtitle">Проектирование, производство и монтаж промышленных установок для водоканалов, предприятий и муниципалитетов.</p>
-                    <div class="hero-buttons">
-                        <a href="contact.html" class="btn btn-primary">Рассчитать проект</a>
-                        <a href="portfolio.html" class="btn btn-ghost">Наши объекты <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                    <div class="hero-meta">
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-val">500+</span>
-                            <span class="hero-meta-lbl">проектов</span>
-                        </div>
-                        <div class="hero-meta-sep"></div>
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-val">12</span>
-                            <span class="hero-meta-lbl">лет опыта</span>
-                        </div>
-                        <div class="hero-meta-sep"></div>
-                        <div class="hero-meta-item">
-                            <span class="hero-meta-val">50+</span>
-                            <span class="hero-meta-lbl">регионов</span>
-                        </div>
-                    </div>
-                </div>
+                    <span class="card-content">
+                        <strong>Электролизные<br>установки</strong>
+                        <small>Получение безопасного гипохлорита натрия непосредственно на объекте.</small>
+                    </span>
+                    <span class="card-action">Технические данные <b>↗</b></span>
+                </button>
 
-                <!-- Process stages visualization -->
-                <div class="process-stages">
-                    <div class="stage-marker stage-1" data-stage="1">
-                        <div class="stage-dot"></div>
-                        <div class="stage-label">Исходная<br>вода</div>
-                    </div>
-                    <div class="stage-marker stage-2" data-stage="2">
-                        <div class="stage-dot"></div>
-                        <div class="stage-label">Обработка</div>
-                    </div>
-                    <div class="stage-marker stage-3" data-stage="3">
-                        <div class="stage-dot"></div>
-                        <div class="stage-label">Фильтрация</div>
-                    </div>
-                    <div class="stage-marker stage-4" data-stage="4">
-                        <div class="stage-dot"></div>
-                        <div class="stage-label">Чистая<br>вода</div>
-                    </div>
-                </div>
+                <button class="direction-card" type="button" data-solution="automation" aria-haspopup="dialog">
+                    <span class="card-number">02</span>
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="3"/><path d="M16 16h16v10H16zM16 33h4M24 33h8M24 8V3M15 8V3M33 8V3M24 45v-5M15 45v-5M33 45v-5M8 24H3M8 15H3M8 33H3M45 24h-5M45 15h-5M45 33h-5"/></svg>
+                    </span>
+                    <span class="card-content">
+                        <strong>АСУ ТП и<br>автоматика</strong>
+                        <small>Шкафы управления, диспетчеризация и контроль технологических процессов.</small>
+                    </span>
+                    <span class="card-action">Технические данные <b>↗</b></span>
+                </button>
+
+                <button class="direction-card" type="button" data-solution="water" aria-haspopup="dialog">
+                    <span class="card-number">03</span>
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48"><path d="M24 5S10 21 10 31a14 14 0 0 0 28 0C38 21 24 5 24 5Z"/><path d="M17 32c1 4 4 6 8 6"/></svg>
+                    </span>
+                    <span class="card-content">
+                        <strong>Водо-<br>подготовка</strong>
+                        <small>Фильтрация, умягчение, обратный осмос и комплексная очистка воды.</small>
+                    </span>
+                    <span class="card-action">Технические данные <b>↗</b></span>
+                </button>
             </div>
         </section>
 
-        <section class="routing-section reveal">
-            <div class="container">
-                <h2 class="sr-only">Решения для отраслей</h2>
-                <div class="routing-grid">
-                    <a href="services.html#design" class="routing-card">
-                        <div class="routing-icon"><i class="fa-solid fa-droplet"></i></div>
-                        <h3>Водоканалы и ВКХ</h3>
-                        <p>Электролизные установки и водоподготовка для систем водоснабжения и водоканалов.</p>
-                        <div class="routing-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    </a>
-                    <a href="services.html#montazh" class="routing-card">
-                        <div class="routing-icon"><i class="fa-solid fa-industry"></i></div>
-                        <h3>Промышленные предприятия</h3>
-                        <p>Системы обеззараживания и водоподготовки для производств, пищепрома и нефтехимии.</p>
-                        <div class="routing-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    </a>
-                    <a href="services.html#repair" class="routing-card">
-                        <div class="routing-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                        <h3>Сервис и модернизация</h3>
-                        <p>Техническое обслуживание, ремонт и модернизация установок любых производителей.</p>
-                        <div class="routing-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    </a>
-                </div>
+        <section class="engineering" aria-labelledby="engineering-title">
+            <div class="engineering-index">04</div>
+            <div class="engineering-copy">
+                <p class="section-kicker">Инженерный цикл</p>
+                <h2 id="engineering-title">Берём ответственность<br>за весь процесс.</h2>
+                <ol class="process-list">
+                    <li><span>01</span><strong>Исследование</strong><small>Анализ воды и технический аудит объекта</small></li>
+                    <li><span>02</span><strong>Проектирование</strong><small>Расчёт технологии и выпуск документации</small></li>
+                    <li><span>03</span><strong>Реализация</strong><small>Производство, монтаж и пусконаладка</small></li>
+                    <li><span>04</span><strong>Поддержка</strong><small>Сервис, модернизация и удалённый контроль</small></li>
+                </ol>
             </div>
         </section>
 
-        <!-- CLIENT INDUSTRIES STRIP -->
-        <section class="clients-strip">
-            <div class="container">
-                <div class="clients-strip-inner">
-                    <p class="clients-strip-label">Работаем с</p>
-                    <div class="clients-sep"></div>
-                    <div class="clients-grid">
-                        <div class="client-type"><i class="fa-solid fa-droplet"></i> Водоканалы</div>
-                        <div class="client-type"><i class="fa-solid fa-industry"></i> Нефтехимия</div>
-                        <div class="client-type"><i class="fa-solid fa-wheat-awn"></i> Агропром</div>
-                        <div class="client-type"><i class="fa-solid fa-utensils"></i> Пищепром</div>
-                        <div class="client-type"><i class="fa-solid fa-building-columns"></i> Муниципалитеты</div>
-                        <div class="client-type"><i class="fa-solid fa-house-chimney-medical"></i> ЖКХ</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NUMBERS / STATS -->
-        <section class="numbers-section reveal">
-            <div class="container">
-                <div class="numbers-grid">
-                    <div class="number-item">
-                        <div class="number-value">500+</div>
-                        <p class="number-label">Реализованных проектов</p>
-                    </div>
-                    <div class="number-item">
-                        <div class="number-value">10+</div>
-                        <p class="number-label">Лет на рынке водоочистки</p>
-                    </div>
-                    <div class="number-item">
-                        <div class="number-value">24/7</div>
-                        <p class="number-label">Сервисная поддержка</p>
-                    </div>
-                    <div class="number-item">
-                        <div class="number-value">50+</div>
-                        <p class="number-label">Регионов обслуживания</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="how-it-works section bg-light reveal">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Как мы работаем</h2>
-                </div>
-                <div class="timeline" id="work-timeline">
-                    <svg class="timeline-connector" preserveAspectRatio="none">
-                        <line class="connector-bg" />
-                        <line class="connector-progress" />
-                    </svg>
-                    <div class="timeline-item" data-timeline-step="1">
-                        <div class="timeline-step">1</div>
-                        <h3 class="timeline-title">Анализ воды</h3>
-                        <p class="timeline-text">Берем пробы и проводим детальный химический анализ в лаборатории.</p>
-                    </div>
-                    <div class="timeline-item" data-timeline-step="2">
-                        <div class="timeline-step">2</div>
-                        <h3 class="timeline-title">Проектирование</h3>
-                        <p class="timeline-text">Индивидуально подбираем оборудование под ваши показатели и нужды.</p>
-                    </div>
-                    <div class="timeline-item" data-timeline-step="3">
-                        <div class="timeline-step">3</div>
-                        <h3 class="timeline-title">Производство и монтаж</h3>
-                        <p class="timeline-text">Изготавливаем и профессионально устанавливаем систему на объекте.</p>
-                    </div>
-                    <div class="timeline-item" data-timeline-step="4">
-                        <div class="timeline-step">4</div>
-                        <h3 class="timeline-title">Сервис</h3>
-                        <p class="timeline-text">Берем систему на регулярное гарантийное и сервисное обслуживание.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="equipment-preview section reveal">
-            <div class="container">
-                <div class="section-header text-center">
-                    <h2>Наше оборудование</h2>
-                    <p class="section-subtitle">Проектируем и производим системы водоподготовки любой сложности</p>
-                </div>
-                <div class="equipment-grid">
-                    <div class="equipment-card">
-                        <div class="equipment-card-image">
-                              <img src="images/equipment/index_electrolysis.png" alt="Электролизные установки">
-                        </div>
-                        <div class="equipment-card-body">
-                            <h3>Электролизные установки</h3>
-                            <p>Системы электролиза для получения дезинфицирующих растворов.</p>
-                            <a href="equipment.html" class="btn btn-outline btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="equipment-card">
-                        <div class="equipment-card-image">
-                              <img src="images/equipment/index_watertreatment.png" alt="Системы водоподготовки">
-                        </div>
-                        <div class="equipment-card-body">
-                            <h3>Системы водоподготовки</h3>
-                            <p>Промышленные установки обратного осмоса, ультрафильтрации и обезжелезивания.</p>
-                            <a href="equipment.html" class="btn btn-outline btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="equipment-card">
-                        <div class="equipment-card-image">
-                              <img src="images/equipment/index_uv.jpg" alt="УФ-обеззараживание">
-                        </div>
-                        <div class="equipment-card-body">
-                            <h3>УФ-обеззараживание</h3>
-                            <p>Ультрафиолетовые стерилизаторы для уничтожения 99.9% бактерий.</p>
-                            <a href="equipment.html" class="btn btn-outline btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                    <div class="equipment-card">
-                        <div class="equipment-card-image">
-                              <img src="images/equipment/index_asutp.jpg" alt="АСУ ТП и автоматика">
-                        </div>
-                        <div class="equipment-card-body">
-                            <h3>АСУ ТП и автоматика</h3>
-                            <p>Шкафы управления и автоматизация процессов водоочистки.</p>
-                            <a href="equipment.html" class="btn btn-outline btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center" style="margin-top: 40px;">
-                    <a href="equipment.html" class="btn btn-primary">Весь каталог</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="trust-section section reveal">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Почему выбирают нас</h2>
-                </div>
-                <div class="trust-grid">                    <div class="trust-item">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <h3>Надёжная гарантия</h3>
-                        <p>Даем официальную гарантию на оборудование и все монтажные работы.</p>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fa-solid fa-boxes-stacked"></i>
-                        <h3>Собственный склад</h3>
-                        <p>Комплектующие и фильтры всегда в наличии. Никаких долгих ожиданий.</p>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fa-solid fa-award"></i>
-                        <h3>Сертификаты качества</h3>
-                        <p>Вся продукция сертифицирована и соответствует ГОСТам и СанПиНам.</p>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fa-solid fa-stopwatch"></i>
-                        <h3>Высокая скорость</h3>
-                        <p>От заявки до запуска системы — кратчайшие сроки в отрасли.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="cta" class="cta-section section reveal">
-            <div class="container">
-                <div class="cta-wrapper">
-                    <div class="cta-content">
-                        <h2>Оставьте заявку на бесплатный расчёт</h2>
-                        <p>Наш инженер свяжется с вами, проконсультирует и подготовит коммерческое предложение в кратчайшие сроки.</p>
-                    </div>
-                    <div class="cta-form-container">
-                        <form class="cta-form" action="#" method="POST">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="Ваше имя" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" name="phone" placeholder="Ваш телефон" required>
-                            </div>
-                            <div class="form-group">
-                                <textarea name="message" placeholder="Опишите задачу (необязательно)" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Отправить заявку</button>
-                            <div class="policy-text">
-                                Нажимая кнопку, вы соглашаетесь с <a href="policy.html">политикой конфиденциальности</a>.
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <section class="project-cta" aria-labelledby="cta-title">
+            <p class="section-kicker">Есть инженерная задача?</p>
+            <h2 id="cta-title">Давайте найдём<br>точное решение.</h2>
+            <a href="contact.html">Обсудить проект <span aria-hidden="true">↗</span></a>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-col brand-col">
-            <a href="index.html" class="logo footer-logo logo-horizontal"><img src="images/bull-icon.png" alt="Логотип Принцип-Про"><div class="logo-text-wrapper"><span class="logo-title">ПРИНЦИП-ПРО</span><span class="logo-subtitle">Оборудование для очистки воды</span></div></a>
-                <p class="footer-desc">Проектирование и производство оборудования для очистки и подготовки воды.</p>
-                <div class="socials">
-                    <a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" aria-label="MAX Chat" target="_blank" title="�������� � MAX"><i class="fa-solid fa-comment-dots"></i></a>
-                    <a href="#" aria-label="VK"><i class="fa-brands fa-vk"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <p class="footer-title">Навигация</p>
-                <ul class="footer-links">
-                    <li><a href="services.html">Услуги</a></li>
-                    <li><a href="equipment.html">Оборудование</a></li>
-                    <li><a href="about.html">О компании</a></li>
-                    <li><a href="portfolio.html">Наши объекты</a></li>
-                    <li><a href="docs.html">Документация</a></li>
-                    <li><a href="reviews.html">Отзывы</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <p class="footer-title">Услуги</p>
-                <ul class="footer-links">
-                    <li><a href="services.html#design">Проектирование</a></li>
-                    <li><a href="services.html#montazh">Монтаж</a></li>
-                    <li><a href="services.html#audit">Технический аудит</a></li>
-                    <li><a href="services.html#repair">Ремонт и сервис</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <p class="footer-title">Контакты</p>
-                <ul class="footer-contacts">
-                    <li><i class="fa-solid fa-phone"></i> <a href="tel:+78005507514">8 (800) 550-75-14</a></li>
-                    <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@princip-pro.ru">info@princip-pro.ru</a></li>
-                    <li><i class="fa-solid fa-location-dot"></i> г. Краснодар</li>
-                </ul>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Компания «Принцип-Про». Все права защищены.</p>
-        </div>
+    <footer class="site-footer">
+        <span>© 2026 Принцип‑Про</span>
+        <a href="tel:+78005507514">8 800 550‑75‑14</a>
+        <a href="mailto:mail@princip-pro.ru">mail@princip-pro.ru</a>
+        <a href="policy.html">Политика конфиденциальности</a>
     </footer>
-    <!-- Modal -->
-    <div class="modal-overlay" id="callback-modal">
-        <div class="modal-content">
-            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-title">Оставить заявку</h3>
-            <p class="modal-desc">Оставьте свои данные, и наш специалист свяжется с вами в течение 15 минут.</p>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+
+    <div class="solution-modal" data-modal aria-hidden="true">
+        <div class="modal-backdrop" data-close-modal></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+            <button class="modal-close" type="button" data-close-modal aria-label="Закрыть окно"><span></span><span></span></button>
+            <div class="modal-topline"><span data-modal-number>01</span><span>Техническое направление</span></div>
+            <div class="modal-grid">
+                <div class="modal-visual">
+                    <img data-modal-image src="" alt="">
+                    <span>Пример исполнения</span>
                 </div>
-                <div class="form-group">
-                    <input type="tel" class="form-control" placeholder="Ваш телефон" required>
+                <div class="modal-copy">
+                    <h2 id="modal-title" data-modal-title></h2>
+                    <p class="modal-lead" data-modal-lead></p>
+                    <h3>Принцип работы</h3>
+                    <p data-modal-description></p>
+                    <h3>Основные характеристики</h3>
+                    <table>
+                        <tbody data-modal-specs></tbody>
+                    </table>
+                    <a href="contact.html" class="modal-cta">Запросить расчёт <span>↗</span></a>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width:100%;">Жду звонка</button>
-                <p class="policy-text" style="font-size: 0.8rem; color: var(--text-secondary); text-align: center; margin-top: 1rem;">Нажимая кнопку, вы соглашаетесь с <a href="policy.html" style="color: var(--accent-color);">политикой конфиденциальности</a>.</p>
-            </form>
+            </div>
         </div>
     </div>
 
-        <!-- MAX Widget -->
-    
-    <script src="js/script.js?v=5"></script>
-<a href="https://max.ru/u/f9LHodD0cOKvAIiG-JIegaAh4_w824uipHCIs8MOaPiqQI20B_xTAg_IQRk" target="_blank" class="floating-chat" title="�������� � MAX">
-    <i class="fa-solid fa-comment-dots"></i>
-</a>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script type="module" src="js/home.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
